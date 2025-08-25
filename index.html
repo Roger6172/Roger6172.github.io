@@ -8,8 +8,7 @@
   <!-- 引入Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入Font Awesome -->
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <!-- 引入Google字体 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  <!-- 引入Google字体 -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- 配置Tailwind -->
@@ -209,7 +208,7 @@
         <p class="text-gray-500 text-sm mb-6">像守护这捧生机一样，我也热爱挖掘数据的生长力 🌱</p>
         
         <p class="text-gray-600 mb-6 leading-relaxed">
-          我是重庆工商大学大数据管理与应用专业的学生，对数据处理、分析及数仓搭建兴趣浓厚。在亚信
+          我是重庆工商大学大数据管理与应用专业的学生，对数据处理、分析及数仓搭建兴趣浓厚。目前在亚信科技数据开发岗位实习。
         </p>
         <p class="text-gray-600 mb-8 leading-relaxed">
           技术栈以 Python、SQL 为核心，精通 Hadoop 生态数据库（如 Hive和Gbase），掌握数仓建模逻辑
@@ -433,18 +432,18 @@
 
             <div class="mt-8 md:mt-0 md:pl-12"> <!-- 增加pl-12左边距 -->
               <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
-                主要工作内容
+                2026年05月 - 2025年06月
               </span>
-              <h3 class="text-2xl font-semibold mb-2 text-gray-800">数据处理与分析</h3>
-              <h4 class="text-xl text-gray-600 mb-4">日常工作重点</h4>
+              <h3 class="text-2xl font-semibold mb-2 text-gray-800">信用卡欺诈模型</h3>
+              <h4 class="text-xl text-gray-600 mb-4">机器学习-stacking集成</h4>
               <p class="text-gray-600 mb-4">
-                根据业务需求编写SQL查询语句提取、清洗和转换数据，确保数据质量和一致性。使用数据可视化工具呈现分析结果，协助业务部门理解数据含义。参与数仓基础模型设计，优化数据存储结构。
+                利用Python和Scikit-learn库，对信用卡交易数据进行特征工程和模型训练。基于 Stacking 集成学习的信用卡欺诈预测研究，以经典的欧洲信用卡交易数据（欺诈样本占比 0.172%）为基础，通过 SMOTE 技术处理类别不平衡问题，构建含 LightGBM、XGBoost 等基础模型 + 逻辑回归元模型的 Stacking 架构，结合五折交叉验证避免数据泄露。模型最终 AUC-ROC 达 0.9768，召回率 81.63%、精确率 80%，误报率仅 0.035%。
               </p>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">SQL查询</span>
                 <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">数据清洗</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">数据转换</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">数仓设计</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">SMOTE</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">机器学习</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">集成模型</span>
               </div>
             </div>
           </div>
@@ -474,7 +473,8 @@
             <h3 class="text-2xl font-semibold mb-2 text-gray-800">大数据管理与应用</h3>
             <h4 class="text-xl text-gray-600 mb-6">重庆工商大学</h4>
             <p class="text-gray-600 mb-6">
-              主修大数据管理与应用专业，系统学习了数据结构、数据库原理、大数据技术、数据挖掘等课程。通过课程项目和实践活动，积累了数据处理和分析的实践经验。
+              主修大数据管理与应用专业，系统学习了数据库原理、大数据技术、数据挖掘、Tableau数据可视化、机器学习等核心课程。通过深入的课程学习和丰富的实践活动，掌握了从数据采集、清洗、存储到分析与可视化的全流程技能。能够熟练运用SQL进行复杂查询与数据库管理，使用Python和R语言进行数据挖掘与机器学习建模，并利用Tableau等工具制作交互式数据看板和分析报告。通过课程项目和团队实践，积累了扎实的数据处理与分析经验。
+
             </p>
             <div class="flex items items-center text-gray-500">
               <i class="fa fa-graduation-cap mr-2"></i>
@@ -488,7 +488,8 @@
       <div class="mt-16">
         <h3 class="text-2xl font-semibold mb-8 text-center text-gray-800">证书与认证</h3>
         <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+          <!-- 原有证书 -->
+          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
             <div class="text-primary text-2xl mr-4">
               <i class="fa fa-certificate"></i>
             </div>
@@ -497,13 +498,36 @@
               <p class="text-gray-600">具备良好的英语阅读和书写能力</p>
             </div>
           </div>
-          <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+          
+          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
             <div class="text-primary text-2xl mr-4">
               <i class="fa fa-trophy"></i>
             </div>
             <div>
               <h4 class="font-semibold mb-1">亚信科技实习认证</h4>
               <p class="text-gray-600">完成数据开发实习项目并获得认证</p>
+            </div>
+          </div>
+          
+          <!-- 新增证书1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
+            <div class="text-primary text-2xl mr-4">
+              <i class="fas fa-skull"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-1">双锤骷髅海</h4>
+              <p class="text-gray-600">APEX成就：单场击杀20人并获得双锤标志</p>
+            </div>
+          </div>
+          
+          <!-- 新增证书2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
+            <div class="text-primary text-2xl mr-4">
+              <i class="fas fa-running"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-1">工商大迫杰</h4>
+              <p class="text-gray-600">跑步赛事成就或相关认证</p>
             </div>
           </div>
         </div>
@@ -529,43 +553,43 @@
             <h3 class="text-2xl font-semibold mb-6">联系方式</h3>
 
             <div class="space-y-6">
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1">
-                  <i class="fa fa-envelope"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">邮箱</h4>
-                  <p class="text-gray-400">luojie16@ctbu.edu.cn</p>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1">
-                  <i class="fa fa-phone"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">电话</h4>
-                  <p class="text-gray-400">17823896729</p>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1">
-                  <i class="fa fa-map-marker"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">地址</h4>
-                  <p class="text-gray-400">重庆工商大学</p>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1">
-                  <i class="fa fa-graduation-cap"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">教育背景</h4>
-                  <p class="text-gray-400">大数据管理与应用专业</p>
-                </div>
-              </div>
-            </div>
+  <div class="flex items-start">
+    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+      <i class="fa fa-envelope"></i>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-1">邮箱</h4>
+      <p class="text-gray-400">luojie16@ctbu.edu.cn</p>
+    </div>
+  </div>
+  <div class="flex items-start">
+    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+      <i class="fa fa-phone"></i>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-1">电话</h4>
+      <p class="text-gray-400">17823896729</p>
+    </div>
+  </div>
+  <div class="flex items-start">
+    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+      <i class="fa fa-map-marker"></i>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-1">地址</h4>
+      <p class="text-gray-400">重庆工商大学</p>
+    </div>
+  </div>
+  <div class="flex items-start">
+    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+      <i class="fa fa-graduation-cap"></i>
+    </div>
+    <div>
+      <h4 class="font-semibold mb-1">教育背景</h4>
+      <p class="text-gray-400">大数据管理与应用专业</p>
+    </div>
+  </div>
+</div>
 
             <div class="mt-10">
               <h4 class="font-semibold mb-4">社交媒体</h4>
