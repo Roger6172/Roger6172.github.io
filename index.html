@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>罗杰 - 数据开发/分析/数仓开发工程师</title>
+  <title>罗杰 - 数据开发/数仓开发工程师</title>
   <!-- 引入Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入Font Awesome -->
@@ -42,7 +42,7 @@
     }
   </script>
 
-  <!-- 自定义样式：新增板块间距和优化动画 -->
+  <!-- 自定义样式 -->
   <style type="text/tailwindcss">
     @layer utilities {
       .content-auto {
@@ -68,19 +68,26 @@
         scrollbar-width: none;
       }
       .section-gap {
-        margin-top: 18rem; /* 增大板块间距，避免重叠 */
+        margin-top: 18rem;
       }
       @media (max-width: 768px) {
         .section-gap {
-          margin-top: 12rem; /* 移动端适当减小间距 */
+          margin-top: 12rem;
         }
       }
-      /* 金数据表单样式 */
-      .jinshuju-form {
+      /* 项目图片容器样式 */
+      .project-img-container {
         width: 100%;
-        min-height: 768px;
-        border: none;
-        border-radius: 0.5rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .project-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
 
@@ -93,16 +100,6 @@
     @keyframes spin-slow {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
-    }
-
-    /* 彩蛋悬停效果 */
-    .easter-egg {
-      transition: all 0.3s ease;
-    }
-    .easter-egg:hover .egg-tooltip {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
@@ -120,6 +117,7 @@
           <a href="#about" class="text-white hover:text-primary transition-custom">关于</a>
           <a href="#skills" class="text-white hover:text-primary transition-custom">技能</a>
           <a href="#experience" class="text-white hover:text-primary transition-custom">经验</a>
+          <a href="#projects" class="text-white hover:text-primary transition-custom">项目</a>
           <a href="#education" class="text-white hover:text-primary transition-custom">教育</a>
           <a href="#contact" class="text-white hover:text-primary transition-custom">联系</a>
         </div>
@@ -135,13 +133,14 @@
         <a href="#about" class="text-gray-800 hover:text-primary py-2 transition-custom">关于</a>
         <a href="#skills" class="text-gray-800 hover:text-primary py-2 transition-custom">技能</a>
         <a href="#experience" class="text-gray-800 hover:text-primary py-2 transition-custom">经验</a>
+        <a href="#projects" class="text-gray-800 hover:text-primary py-2 transition-custom">项目</a>
         <a href="#education" class="text-gray-800 hover:text-primary py-2 transition-custom">教育</a>
         <a href="#contact" class="text-gray-800 hover:text-primary py-2 transition-custom">联系</a>
       </div>
     </div>
   </header>
 
-  <!-- 英雄区域：证件照（5.jpg）+ 旋转渐变边框 -->
+  <!-- 英雄区域 -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-dark to-gray-800">
     <!-- 背景装饰 -->
     <div class="absolute inset-0 overflow-hidden">
@@ -156,17 +155,17 @@
             你好，我是<span class="text-primary">罗杰</span>
           </h1>
           <h2 class="text-[clamp(1.2rem,3vw,1.8rem)] text-gray-300 mb-8">
-            数据开发/分析/数仓开发工程师
+            数据开发/数仓开发工程师
           </h2>
           <p class="text-gray-400 text-lg mb-8 max-w-lg mx-auto md:mx-0">
-            专注于大数据处理、数据分析及数仓建设，擅长利用 Python、SQL 及大数据生态工具，高效完成数据提取、转换、加载（ETL）及数仓建模工作。
+            专注于大数据处理与数据仓库建设，熟练掌握SQL、Python及Hadoop生态工具，具备企业级数据开发实战经验。
           </p>
           <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
             <a href="#contact" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-custom shadow-lg hover:shadow-primary/30 hover:shadow-xl hover:-translate-y-1">
               联系我
             </a>
-            <a href="#experience" class="px-8 py-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 rounded-lg font-medium transition-custom hover:-translate-y-1">
-              查看我的经历
+            <a href="#projects" class="px-8 py-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 rounded-lg font-medium transition-custom hover:-translate-y-1">
+              查看我的项目
             </a>
           </div>
         </div>
@@ -197,85 +196,85 @@
     </div>
   </section>
 
-<!-- 关于我：手心绿植（1.jpg）+ 增加间距 -->
-<section id="about" class="py-20 bg-white section-gap">
-  <div class="container mx-auto px-4 md:px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">关于我</h2>
-      <div class="w-20 h-1 bg-primary mx-auto"></div>
-    </div>
-    <div class="grid md:grid-cols-3 gap-10 items-center">
-      <div class="md:col-span-1" data-aos="fade-right">
-        <div class="relative">
-          <!-- 手心绿植（1.jpg） -->
-          <img src="1.jpg" alt="手心绿植呼应数据生命力" class="max-w-xs h-auto rounded-lg shadow-xl mx-auto">
-        </div>
+  <!-- 关于我 -->
+  <section id="about" class="py-20 bg-white section-gap">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">关于我</h2>
+        <div class="w-20 h-1 bg-primary mx-auto"></div>
       </div>
-      <div class="md:col-span-2" data-aos="fade-left">
-        <h3 class="text-2xl font-semibold mb-2 text-gray-800">我是一名数据领域多方向工程师</h3>
-        <p class="text-gray-500 text-sm mb-6">像守护这捧生机一样，我也热爱挖掘数据的生长力 🌱</p>
-        
-        <p class="text-gray-600 mb-6 leading-relaxed">
-          我是重庆工商大学大数据管理与应用专业的学生，对数据处理、分析及数仓搭建兴趣浓厚。目前在亚信科技数据开发岗位实习。
-        </p>
-        <p class="text-gray-600 mb-8 leading-relaxed">
-          技术栈以 Python、SQL 为核心，精通 Hadoop 生态数据库（如 Hive和Gbase），掌握数仓建模逻辑
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-          <div class="flex items-start">
-            <div class="text-primary text-xl mr-4 mt-1">
-              <i class="fa fa-check-circle"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-2">数据处理</h4>
-              <p class="text-gray-600 text-sm">熟练用 SQL、Python 提取、处理数据</p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="text-primary text-xl mr-4 mt-1">
-              <i class="fa fa-check-circle"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-2">大数据平台</h4>
-              <p class="text-gray-600 text-sm">熟用 Hadoop、Hive 等大数据工具</p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="text-primary text-xl mr-4 mt-1">
-              <i class="fa fa-check-circle"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-2">数仓建模</h4>
-              <p class="text-gray-600 text-sm">具备数仓开发与建模基础能力</p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="text-primary text-xl mr-4 mt-1">
-              <i class="fa fa-check-circle"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-2">团队协作</h4>
-              <p class="text-gray-600 text-sm">沟通高效，能协作推进项目</p>
-            </div>
+      <div class="grid md:grid-cols-3 gap-10 items-center">
+        <div class="md:col-span-1" data-aos="fade-right">
+          <div class="relative">
+            <!-- 手心绿植（1.jpg） -->
+            <img src="1.jpg" alt="手心绿植呼应数据生命力" class="max-w-xs h-auto rounded-lg shadow-xl mx-auto">
           </div>
         </div>
-        <a href="#" class="inline-flex items-center px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-custom shadow-md hover:shadow-lg hover:-translate-y-1">
-          下载我的简历
-          <i class="fa fa-download ml-2"></i>
-        </a>
+        <div class="md:col-span-2" data-aos="fade-left">
+          <h3 class="text-2xl font-semibold mb-2 text-gray-800">数据开发工程师</h3>
+          <p class="text-gray-500 text-sm mb-6">专注于数据仓库建设与大数据处理</p>
+          
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            我是重庆工商大学大数据管理与应用专业的学生，对数据处理、分析及数仓搭建兴趣浓厚。目前在艾瑞数智数据开发岗位实习。
+          </p>
+          <p class="text-gray-600 mb-8 leading-relaxed">
+            技术栈以 SQL、Python 为核心，精通 Hadoop 生态数据库（如 Hive和Gbase），掌握数仓建模逻辑，具备企业级数据开发实践经验。
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div class="flex items-start">
+              <div class="text-primary text-xl mr-4 mt-1">
+                <i class="fa fa-database"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">数据开发</h4>
+                <p class="text-gray-600 text-sm">熟练编写复杂SQL，熟悉Hive/GBase等数据库</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="text-primary text-xl mr-4 mt-1">
+                <i class="fa fa-code"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">Python开发</h4>
+                <p class="text-gray-600 text-sm">掌握Pandas、Scikit-learn等库进行数据处理与建模</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="text-primary text-xl mr-4 mt-1">
+                <i class="fa fa-sitemap"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">数仓建模</h4>
+                <p class="text-gray-600 text-sm">具备数据仓库分层建模与开发经验</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="text-primary text-xl mr-4 mt-1">
+                <i class="fa fa-chart-line"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">数据分析</h4>
+                <p class="text-gray-600 text-sm">能够进行业务数据提取与初步分析</p>
+              </div>
+            </div>
+          </div>
+          <a href="罗杰-数据开发工程师-简历.pdf" download class="inline-flex items-center px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-custom shadow-md hover:shadow-lg hover:-translate-y-1">
+            下载我的简历
+            <i class="fa fa-download ml-2"></i>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- 技能：增加间距 -->
-    
+  </section>
+
+  <!-- 技能 -->
   <section id="skills" class="py-20 bg-gray-100 section-gap">
     <div class="container mx-auto px-4 md:px-12">
       <div class="text-center mb-16">
         <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">我的技能</h2>
         <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
         <p class="text-gray-600 max-w-2xl mx-auto">
-          聚焦数据开发、分析、数仓领域，掌握多样数据工具，覆盖数据处理全流程需求
+          聚焦数据开发、数仓领域，掌握多样数据工具，覆盖数据处理全流程需求
         </p>
       </div>
 
@@ -285,31 +284,31 @@
           <h3 class="text-2xl font-semibold mb-8 text-gray-800">技术技能</h3>
           <div class="space-y-6">
             <div>
+              <div class="font-medium text-gray-700 mb-2">SQL & Hive</div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-primary h-2.5 rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
               <div class="font-medium text-gray-700 mb-2">Python</div>
               <div class="w-full bg-gray-200 rounded-full h-2.5">
                 <div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
               </div>
             </div>
             <div>
-              <div class="font-medium text-gray-700 mb-2">SQL</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 90%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="font-medium text-gray-700 mb-2">Hadoop</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="font-medium text-gray-700 mb-2">Hive</div>
+              <div class="font-medium text-gray-700 mb-2">数据仓库建模</div>
               <div class="w-full bg-gray-200 rounded-full h-2.5">
                 <div class="bg-primary h-2.5 rounded-full" style="width: 80%"></div>
               </div>
             </div>
             <div>
-              <div class="font-medium text-gray-700 mb-2">Gbase</div>
+              <div class="font-medium text-gray-700 mb-2">Hadoop生态</div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="font-medium text-gray-700 mb-2">Spark/Flink</div>
               <div class="w-full bg-gray-200 rounded-full h-2.5">
                 <div class="bg-primary h-2.5 rounded-full" style="width: 70%"></div>
               </div>
@@ -317,7 +316,7 @@
             <div>
               <div class="font-medium text-gray-700 mb-2">ETL流程</div>
               <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 80%"></div>
+                <div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
               </div>
             </div>
           </div>
@@ -375,14 +374,14 @@
     </div>
   </section>
 
-  <!-- 工作经验：调整间距和图片大小 -->
+  <!-- 工作经验 -->
   <section id="experience" class="py-20 bg-white section-gap">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-16">
         <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">工作经验</h2>
         <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
         <p class="text-gray-600 max-w-2xl mx-auto">
-          在亚信科技的实习经历让我积累了丰富的数据开发实践经验
+          在艾瑞数智的实习经历让我积累了丰富的数据开发实践经验
         </p>
       </div>
 
@@ -392,16 +391,16 @@
 
         <!-- 经验条目 -->
         <div class="space-y-20">
-          <!-- 实习经历：双萌娃（2.jpg） -->
-          <div class="md:grid md:grid-cols-2 gap-24 items-center" data-aos="fade-right"> <!-- 增加gap从16到24 -->
-            <div class="md:text-right md:pr-12 order-2 md:order-1"> <!-- 增加pr-12右边距 -->
+          <!-- 实习经历 -->
+          <div class="md:grid md:grid-cols-2 gap-24 items-center" data-aos="fade-right">
+            <div class="md:text-right md:pr-12 order-2 md:order-1">
               <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
-                2025年05月 - 2025年12月
+                2025年05月 - 2025年10月
               </span>
               <h3 class="text-2xl font-semibold mb-2 text-gray-800">数据开发实习生</h3>
-              <h4 class="text-xl text-gray-600 mb-4">亚信科技</h4>
+              <h4 class="text-xl text-gray-600 mb-4">艾瑞数智</h4>
               <p class="text-gray-600 mb-4">
-                日常使用DACP数据平台进行SQL代码固化与管理，通过数据交换工具完成数据导出与分发。参与设计用户画像标签体系，根据业务部门需求编写高效SQL代码提取数据，保障数据准确性与及时性。
+                在市场经营部门实习，核心处理重庆移动存量运营数据，涵盖用户属性、地域分布、业务类型等多类维表，及大型活动成效、用户通信详单、APP使用行为等多类事实表。
               </p>
               <div class="flex flex-wrap justify-end gap-2">
                 <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">SQL</span>
@@ -414,44 +413,40 @@
             <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-white"></div>
             
             <!-- 双萌娃（2.jpg） -->
-            <div class="order-1 md:order-2 relative mt-8 md:mt-0 md:pl-12"> <!-- 增加pl-12左边距 -->
+            <div class="order-1 md:order-2 relative mt-8 md:mt-0 md:pl-12">
               <img src="2.jpg" alt="需求沟通现场" class="w-full h-auto rounded-lg shadow-lg object-cover">
-              <div class="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 
-                          bg-white p-2 text-xs text-gray-800 rounded-md shadow-md">
-                <!-- <p>需求沟通现场：主打一个真诚脸 😜</p> -->
-              </div>
             </div>
           </div>
 
-          <!-- 主要工作内容：桶盖萌娃（3.jpg）+ 旋转动画 -->
-          <div class="md:grid md:grid-cols-2 gap-24 items-center" data-aos="fade-left"> <!-- 增加gap从16到24 -->
-            <div class="relative md:pr-12"> <!-- 增加pr-12右边距 -->
+          <!-- 主要工作内容 -->
+          <div class="md:grid md:grid-cols-2 gap-24 items-center" data-aos="fade-left">
+            <div class="relative md:pr-12">
               <!-- 桶盖萌娃（3.jpg）+ 旋转动画 -->
-              <div class="w-full overflow-hidden rounded-full shadow-lg border-2 border-primary/20 animate-spin-slow"> <!-- 改为圆形 -->
+              <div class="w-full overflow-hidden rounded-full shadow-lg border-2 border-primary/20 animate-spin-slow">
                 <img src="4.jpg" alt="数仓建模场景" class="w-full h-auto">
-              </div>
-              <div class="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 
-                          bg-white p-2 text-xs text-gray-800 rounded-md shadow-md">
-                <!-- <p>数仓建模：给数据 "戴帽子" 分类啦 🎩</p> -->
               </div>
             </div>
 
             <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-white"></div>
 
-            <div class="mt-8 md:mt-0 md:pl-12"> <!-- 增加pl-12左边距 -->
+            <div class="mt-8 md:mt-0 md:pl-12">
               <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
-                2026年05月 - 2025年06月
+                2025年05月 - 2025年10月
               </span>
-              <h3 class="text-2xl font-semibold mb-2 text-gray-800">信用卡欺诈模型</h3>
-              <h4 class="text-xl text-gray-600 mb-4">机器学习-stacking集成</h4>
+              <h3 class="text-2xl font-semibold mb-2 text-gray-800">主要工作内容</h3>
               <p class="text-gray-600 mb-4">
-                利用Python和Scikit-learn库，对信用卡交易数据进行特征工程和模型训练。基于 Stacking 集成学习的信用卡欺诈预测研究，以经典的欧洲信用卡交易数据（欺诈样本占比 0.172%）为基础，通过 SMOTE 技术处理类别不平衡问题，构建含 LightGBM、XGBoost 等基础模型 + 逻辑回归元模型的 Stacking 架构，结合五折交叉验证避免数据泄露。模型最终 AUC-ROC 达 0.9768，召回率 81.63%、精确率 80%，误报率仅 0.035%。
+                <ul class="list-disc pl-5 text-gray-600 mb-4">
+                  <li>编写 SQL 满足各类业务需求，涉及多张维表与事实表关联</li>
+                  <li>依托数据中台实现模型与程序的分层固化，重点应用 DW 层与 ST 层</li>
+                  <li>在数据中台配置数据交换接口（DataX），完成跨数据库表同步</li>
+                  <li>配置多维度用户画像标签，持续更新用户特征</li>
+                </ul>
               </p>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">数据清洗</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">SMOTE</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">机器学习</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">集成模型</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">多表关联</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">数据中台</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">DataX</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">分层建模</span>
               </div>
             </div>
           </div>
@@ -460,7 +455,97 @@
     </div>
   </section>
 
-  <!-- 教育背景：增加间距 -->
+  <!-- 项目展示 -->
+  <section id="projects" class="py-20 bg-gray-100 section-gap">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">项目展示</h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          以下是我参与开发的一些数据相关项目
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-1 gap-12 max-w-4xl mx-auto">
+        <!-- 信用卡欺诈检测项目 - 修复图片显示 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
+          <div class="md:flex">
+            <div class="md:flex-shrink-0 md:w-1/3 h-64 md:h-auto">
+              <div class="project-img-container">
+                <!-- 修复图片路径和显示问题 -->
+                <img src="7.jpg" alt="信用卡欺诈检测项目" class="project-img rounded-l-xl">
+              </div>
+            </div>
+            <div class="p-8">
+              <div class="uppercase tracking-wide text-sm text-primary font-semibold">机器学习项目</div>
+              <h3 class="text-2xl font-semibold mt-2 text-gray-800">信用卡欺诈检测系统</h3>
+              <p class="mt-4 text-gray-600">
+                基于高度不平衡(欺诈样本0.172%)的欧洲信用卡交易数据(28.5万条)，系统性实施特征工程：重构Time为Hour/Day时序特征，应用LogAmount对数变换和RobustScaler标准化金额特征。设计Stacking集成学习框架，通过五折分层交叉验证生成OOF预测作为元特征，避免数据泄露。模型在测试集上达到AUC 0.9768、召回率81.63%、精确率80%、误报率0.035%。
+              </p>
+              <div class="mt-6">
+                <h4 class="font-semibold text-gray-700 mb-2">技术栈:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Python</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Scikit-learn</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">SMOTE</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Stacking集成</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">特征工程</span>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h4 class="font-semibold text-gray-700 mb-2">项目成果:</h4>
+                <ul class="list-disc list-inside text-gray-600 space-y-1">
+                  <li>AUC-ROC: 0.9768，召回率: 81.63%，精确率: 80%</li>
+                  <li>较单一模型(XGBoost/随机森林)召回率提升9-16个百分点</li>
+                  <li>完成模型工程化准备，实现预处理流水线和预测模型的持久化</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 实时评论分析系统项目 - 修复图片显示 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
+          <div class="md:flex">
+            <div class="md:flex-shrink-0 md:w-1/3 h-64 md:h-auto">
+              <div class="project-img-container">
+                <!-- 修复图片路径和显示问题 -->
+                <img src="6.jpg" alt="实时评论分析系统" class="project-img rounded-l-xl">
+              </div>
+            </div>
+            <div class="p-8">
+              <div class="uppercase tracking-wide text-sm text-primary font-semibold">实时流处理项目</div>
+              <h3 class="text-2xl font-semibold mt-2 text-gray-800">实时评论分析系统</h3>
+              <p class="mt-4 text-gray-600">
+                设计实时数据处理架构，基于Kafka+Redis构建评论分析流水线，实现从数据采集、实时处理到可视化展示的全链路部署。采用Kafka消息队列解耦系统组件，设计消费组策略与重试机制保障数据可靠传输；利用Redis Hash结构存储实时统计，List结构缓存处理记录，优化查询性能。通过Docker容器化部署Kafka和Zookeeper，解决Windows环境下大数据组件的依赖冲突与环境隔离问题。
+              </p>
+              <div class="mt-6">
+                <h4 class="font-semibold text-gray-700 mb-2">技术栈:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Kafka</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Redis</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Docker</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Streamlit</span>
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">实时处理</span>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h4 class="font-semibold text-gray-700 mb-2">项目特点:</h4>
+                <ul class="list-disc list-inside text-gray-600 space-y-1">
+                  <li>基于Kafka+Redis构建实时数据处理流水线</li>
+                  <li>使用Docker容器化解决环境兼容性问题</li>
+                  <li>完整的流处理架构设计与实现</li>
+                  <li>基于Streamlit开发交互式可视化看板</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教育背景 -->
   <section id="education" class="py-20 bg-gray-100 section-gap">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-16">
@@ -481,8 +566,7 @@
             <h3 class="text-2xl font-semibold mb-2 text-gray-800">大数据管理与应用</h3>
             <h4 class="text-xl text-gray-600 mb-6">重庆工商大学</h4>
             <p class="text-gray-600 mb-6">
-              主修大数据管理与应用专业，系统学习了数据库原理、大数据技术、数据挖掘、Tableau数据可视化、机器学习等核心课程。通过深入的课程学习和丰富的实践活动，掌握了从数据采集、清洗、存储到分析与可视化的全流程技能。能够熟练运用SQL进行复杂查询与数据库管理，使用Python和R语言进行数据挖掘与机器学习建模，并利用Tableau等工具制作交互式数据看板和分析报告。通过课程项目和团队实践，积累了扎实的数据处理与分析经验。
-
+              主修大数据管理与应用专业，系统学习了数据库原理、Hadoop技术栈、Python编程、机器学习、统计学、Tableau可视化分析等核心课程。通过深入的课程学习和丰富的实践活动，掌握了从数据采集、清洗、存储到分析与可视化的全流程技能。
             </p>
             <div class="flex items items-center text-gray-500">
               <i class="fa fa-graduation-cap mr-2"></i>
@@ -496,7 +580,6 @@
       <div class="mt-16">
         <h3 class="text-2xl font-semibold mb-8 text-center text-gray-800">证书与认证</h3>
         <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <!-- 原有证书 -->
           <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
             <div class="text-primary text-2xl mr-4">
               <i class="fa fa-certificate"></i>
@@ -512,30 +595,28 @@
               <i class="fa fa-trophy"></i>
             </div>
             <div>
-              <h4 class="font-semibold mb-1">亚信科技实习认证</h4>
+              <h4 class="font-semibold mb-1">艾瑞数智实习认证</h4>
               <p class="text-gray-600">完成数据开发实习项目并获得认证</p>
             </div>
           </div>
           
-          <!-- 新增证书1 -->
           <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
             <div class="text-primary text-2xl mr-4">
-              <i class="fas fa-skull"></i>
+              <i class="fa fa-code"></i>
             </div>
             <div>
-              <h4 class="font-semibold mb-1">双锤骷髅海</h4>
-              <p class="text-gray-600">APEX成就：单场击杀20人并获得双锤标志</p>
+              <h4 class="font-semibold mb-1">数据开发项目认证</h4>
+              <p class="text-gray-600">完成多个数据开发与机器学习项目</p>
             </div>
           </div>
           
-          <!-- 新增证书2 -->
           <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
             <div class="text-primary text-2xl mr-4">
-              <i class="fas fa-running"></i>
+              <i class="fa fa-graduation-cap"></i>
             </div>
             <div>
-              <h4 class="font-semibold mb-1">工商大迫杰</h4>
-              <p class="text-gray-600">跑步成就认证</p>
+              <h4 class="font-semibold mb-1">学术成就</h4>
+              <p class="text-gray-600">学年论文《基于Stacking集成学习的信用卡欺诈预测》</p>
             </div>
           </div>
         </div>
@@ -543,7 +624,35 @@
     </div>
   </section>
 
-  <!-- 联系我：比耶萌娃（4.jpg）+ 旋转效果 -->
+  <!-- 技术分享 -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">学习日记分享</h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto">记录学习与项目中的技术思考</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-custom">
+          <h3 class="font-semibold mb-2">Stacking集成学习实践</h3>
+          <p class="text-gray-600 text-sm mb-4">信用卡欺诈检测项目中的模型构建经验</p>
+          <span class="text-primary text-sm">阅读更多 →</span>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-custom">
+          <h3 class="font-semibold mb-2">数据仓库分层建模</h3>
+          <p class="text-gray-600 text-sm mb-4">企业级数据仓库设计与实施经验</p>
+          <span class="text-primary text-sm">阅读更多 →</span>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-custom">
+          <h3 class="font-semibold mb-2">实时数据处理架构</h3>
+          <p class="text-gray-600 text-sm mb-4">Kafka+Redis流式处理系统设计</p>
+          <span class="text-primary text-sm">阅读更多 →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我 -->
   <section id="contact" class="py-20 bg-gray-900 text-white section-gap">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-16">
@@ -555,49 +664,49 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-12">
-        <!-- 联系信息 + 比耶萌娃（4.jpg）彩蛋 -->
+        <!-- 联系信息 -->
         <div data-aos="fade-right">
           <div class="bg-gray-800 p-8 rounded-xl h-full relative">
             <h3 class="text-2xl font-semibold mb-6">联系方式</h3>
 
             <div class="space-y-6">
-  <div class="flex items-start">
-    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-      <i class="fa fa-envelope"></i>
-    </div>
-    <div>
-      <h4 class="font-semibold mb-1">邮箱</h4>
-      <p class="text-gray-400">luojie16@ctbu.edu.cn</p>
-    </div>
-  </div>
-  <div class="flex items-start">
-    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-      <i class="fa fa-phone"></i>
-    </div>
-    <div>
-      <h4 class="font-semibold mb-1">电话</h4>
-      <p class="text-gray-400">17823896729</p>
-    </div>
-  </div>
-  <div class="flex items-start">
-    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-      <i class="fa fa-map-marker"></i>
-    </div>
-    <div>
-      <h4 class="font-semibold mb-1">地址</h4>
-      <p class="text-gray-400">重庆工商大学</p>
-    </div>
-  </div>
-  <div class="flex items-start">
-    <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-      <i class="fa fa-graduation-cap"></i>
-    </div>
-    <div>
-      <h4 class="font-semibold mb-1">教育背景</h4>
-      <p class="text-gray-400">大数据管理与应用专业</p>
-    </div>
-  </div>
-</div>
+              <div class="flex items-start">
+                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+                  <i class="fa fa-envelope"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1">邮箱</h4>
+                  <p class="text-gray-400">luojie16@ctbu.edu.cn</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1">电话</h4>
+                  <p class="text-gray-400">17823896729</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+                  <i class="fa fa-map-marker"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1">地址</h4>
+                  <p class="text-gray-400">重庆工商大学</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
+                  <i class="fa fa-graduation-cap"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1">教育背景</h4>
+                  <p class="text-gray-400">大数据管理与应用专业</p>
+                </div>
+              </div>
+            </div>
 
             <div class="mt-10">
               <h4 class="font-semibold mb-4">社交媒体</h4>
@@ -645,11 +754,14 @@
           <a href="#" class="text-2xl font-bold">
             <span class="text-primary">罗</span>杰
           </a>
-          <p class="text-gray-400 mt-2">数据开发/分析/数仓开发工程师</p>
+          <p class="text-gray-400 mt-2">数据开发/数仓开发工程师</p>
         </div>
         <div class="text-gray-400 text-sm">
           &copy; 2025 罗杰. 保留所有权利.
         </div>
+      </div>
+      <div class="mt-4 text-center md:text-right text-xs text-gray-500">
+        本网站使用 Tailwind CSS 和 Font Awesome 图标库构建
       </div>
     </div>
   </footer>
