@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 
 <head>
@@ -51,21 +51,42 @@
       .text-shadow {
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
-      .transition-custom {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      .glass {
+        background: rgba(17, 29, 51, 0.65);
+        border: 1px solid rgba(162, 197, 255, 0.2);
+        backdrop-filter: blur(12px);
       }
-      .animate-float {
-        animation: float 6s ease-in-out infinite;
+      .fx-btn {
+        position: relative;
+        overflow: hidden;
+        transition: transform .25s ease, box-shadow .25s ease;
       }
-      .animate-spin-slow {
-        animation: spin-slow 15s linear infinite;
+      .fx-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .25) 50%, transparent 70%);
+        transform: translateX(-140%);
+        transition: transform .5s ease;
       }
-      .scrollbar-hide::-webkit-scrollbar {
-        display: none;
+      .fx-btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 0 0 1px rgba(0, 212, 255, .45), 0 0 32px rgba(0, 212, 255, .25);
       }
-      .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+      .fx-btn:hover::after {
+        transform: translateX(140%);
+      }
+      .flip-card {
+        perspective: 1000px;
+      }
+      .flip-card-inner {
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform .6s ease;
+        min-height: 224px;
+      }
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
       }
       .section-gap {
         margin-top: 18rem;
@@ -95,777 +116,498 @@
       0% { transform: translateY(0px); }
       50% { transform: translateY(-15px); }
       100% { transform: translateY(0px); }
-    }
-
-    @keyframes spin-slow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      }
+      .pixel-box {
+        image-rendering: pixelated;
+        background-image: linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,.06) 1px, transparent 1px);
+        background-size: 12px 12px;
+      }
     }
   </style>
 </head>
+<body class="bg-ink text-slate-100 font-sans bg-mesh overflow-x-hidden">
+  <!-- 鼠标光晕与尾迹效果 -->
+  <div id="cursorGlow" class="cursor-glow"></div>
 
-<body class="font-inter bg-light text-gray-800 antialiased">
-  <!-- 导航栏 -->
-  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
-    <div class="container mx-auto px-4 md:px-6 py-4">
-      <nav class="flex items-center justify-between">
-        <a href="#" class="text-2xl font-bold text-white text-shadow">
-          <span class="text-primary">罗</span>杰
-        </a>
-        <!-- 桌面导航 -->
-        <div class="hidden md:flex space-x-8">
-          <a href="#about" class="text-white hover:text-primary transition-custom">关于</a>
-          <a href="#skills" class="text-white hover:text-primary transition-custom">技能</a>
-          <a href="#experience" class="text-white hover:text-primary transition-custom">经验</a>
-          <a href="#projects" class="text-white hover:text-primary transition-custom">项目</a>
-          <a href="#education" class="text-white hover:text-primary transition-custom">教育</a>
-          <a href="#contact" class="text-white hover:text-primary transition-custom">联系</a>
-        </div>
-        <!-- 移动端菜单按钮 -->
-        <button id="menu-toggle" class="md:hidden text-white text-2xl">
-          <i class="fa fa-bars"></i>
-        </button>
+  <header class="sticky top-0 z-50 border-b border-slate-800/70 bg-ink/75 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#hero" class="text-lg font-bold tracking-wide">ROGER<span class="text-neon">.CV</span></a>
+      <nav class="hidden gap-6 text-sm md:flex">
+        <a href="#about" class="hover:text-neon">关于</a>
+        <a href="#experience" class="hover:text-neon">经历</a>
+        <a href="#skills" class="hover:text-neon">技能</a>
+        <a href="#projects" class="hover:text-neon">项目</a>
+        <a href="#integrations" class="hover:text-neon">外部接口</a>
+        <a href="#contact" class="hover:text-neon">联系</a>
       </nav>
-    </div>
-    <!-- 移动端导航菜单 -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
-      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-        <a href="#about" class="text-gray-800 hover:text-primary py-2 transition-custom">关于</a>
-        <a href="#skills" class="text-gray-800 hover:text-primary py-2 transition-custom">技能</a>
-        <a href="#experience" class="text-gray-800 hover:text-primary py-2 transition-custom">经验</a>
-        <a href="#projects" class="text-gray-800 hover:text-primary py-2 transition-custom">项目</a>
-        <a href="#education" class="text-gray-800 hover:text-primary py-2 transition-custom">教育</a>
-        <a href="#contact" class="text-gray-800 hover:text-primary py-2 transition-custom">联系</a>
-      </div>
+      <a href="#contact" class="fx-btn rounded-full border border-neon/40 px-4 py-2 text-sm">发送消息</a>
     </div>
   </header>
 
-  <!-- 英雄区域 -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-dark to-gray-800">
-    <!-- 背景装饰 -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
-      <div class="absolute top-1/2 -left-20 w-72 h-72 bg-secondary/20 rounded-full blur-3xl"></div>
+  <!-- 英雄区：粒子背景 + 视差 -->
+  <section id="hero" class="relative isolate overflow-hidden">
+    <div id="particles-hero" class="absolute inset-0 -z-10"></div>
+    <div class="absolute -top-24 right-8 -z-10 h-72 w-72 rounded-full bg-fire/20 blur-3xl hero-parallax" data-parallax="0.08"></div>
+    <div class="absolute bottom-4 left-4 -z-10 h-80 w-80 rounded-full bg-neon/20 blur-3xl hero-parallax" data-parallax="0.15"></div>
+    <div class="mx-auto grid max-w-6xl gap-8 px-5 py-16 md:grid-cols-2 md:py-24">
+      <div data-aos="fade-up">
+        <p class="mb-4 inline-flex items-center rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs text-lime">AVAILABLE FOR PRODUCT / FRONTEND</p>
+        <h1 class="text-4xl font-bold leading-tight md:text-6xl">
+          交付导向的
+          <span class="text-neon">产品与前端工程师</span>
+        </h1>
+        <p class="mt-5 max-w-xl text-slate-300">
+          聚焦业务增长和用户体验，擅长把复杂需求拆成可落地的产品方案与工程实现，持续推动上线效率和质量。
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#projects" class="fx-btn rounded-xl bg-neon px-5 py-3 text-sm font-semibold text-ink">查看项目</a>
+          <a href="#contact" class="fx-btn rounded-xl border border-slate-600 px-5 py-3 text-sm">合作沟通</a>
+        </div>
+        <div class="mt-8 grid max-w-md grid-cols-3 gap-4 text-center text-sm">
+          <div class="glass rounded-xl p-3">
+            <p class="text-2xl font-bold text-neon">4+</p>
+            <p class="text-slate-300">年项目经验</p>
+          </div>
+          <div class="glass rounded-xl p-3">
+            <p class="text-2xl font-bold text-lime">30+</p>
+            <p class="text-slate-300">功能上线</p>
+          </div>
+          <div class="glass rounded-xl p-3">
+            <p class="text-2xl font-bold text-fire">99.9%</p>
+            <p class="text-slate-300">线上可用性</p>
+          </div>
+        </div>
+      </div>
+      <div data-aos="zoom-in" class="relative">
+        <div class="glass shadow-card rounded-2xl p-5">
+          <div class="mb-4 flex items-center justify-between">
+            <p class="text-sm text-slate-300">能力雷达</p>
+            <p class="text-xs text-neon">实时更新</p>
+          </div>
+          <lottie-player
+            src="https://assets8.lottiefiles.com/packages/lf20_w51pcehl.json"
+            background="transparent"
+            speed="1"
+            style="width:100%;height:280px"
+            loop
+            autoplay>
+          </lottie-player>
+          <p class="mt-3 text-sm text-slate-300">专注产品拆解、前端架构、数据可视化和体验优化。</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="container mx-auto px-4 md:px-6 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="text-center md:text-left" data-aos="fade-right">
-          <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white leading-tight mb-4">
-            你好，我是<span class="text-primary">罗杰</span>
-          </h1>
-          <h2 class="text-[clamp(1.2rem,3vw,1.8rem)] text-gray-300 mb-8">
-            数据开发/数仓开发工程师
-          </h2>
-          <p class="text-gray-400 text-lg mb-8 max-w-lg mx-auto md:mx-0">
-            专注于大数据处理与数据仓库建设，熟练掌握SQL、Python及Hadoop生态工具，具备企业级数据开发实战经验。
+  <main class="mx-auto max-w-6xl space-y-14 px-5 py-10">
+    <!-- 简历信息：精简专业化 -->
+    <section id="about" class="grid gap-6 md:grid-cols-3">
+      <article class="glass rounded-2xl p-6 md:col-span-2" data-aos="fade-right">
+        <h2 class="text-2xl font-bold">关于我</h2>
+        <p class="mt-4 leading-7 text-slate-300">
+          具备产品和前端双重视角，能从目标、流程、交互到实现闭环推进。对项目管理、需求澄清和跨团队协作有稳定产出，习惯以数据和结果驱动迭代。
+        </p>
+      </article>
+      <article class="glass rounded-2xl p-6" data-aos="fade-left">
+        <h3 class="text-lg font-semibold">联系方式</h3>
+        <ul class="mt-4 space-y-2 text-sm text-slate-300">
+          <li>邮箱：roger@example.com</li>
+          <li>电话：+86 139-0000-0000</li>
+          <li>地点：上海 / 可远程协作</li>
+          <li>GitHub：@Roger6172</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="education" class="grid gap-6 md:grid-cols-2">
+      <article class="glass rounded-2xl p-6" data-aos="fade-up">
+        <h3 class="text-xl font-semibold">教育背景</h3>
+        <p class="mt-4 text-slate-300">
+          本科，计算机相关专业（2018 - 2022）<br>
+          重点方向：软件工程、数据结构、人机交互。
+        </p>
+      </article>
+      <article id="experience" class="glass rounded-2xl p-6" data-aos="fade-up" data-aos-delay="120">
+        <h3 class="text-xl font-semibold">工作经验</h3>
+        <div class="mt-4 space-y-4 text-slate-300">
+          <p>前端工程师 / 产品协作角色（2022 - 至今）</p>
+          <p class="text-sm">
+            负责核心页面架构与性能优化，建立组件规范，推进多端适配与可观测性建设，支持多个业务功能按期上线。
           </p>
-          <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-            <a href="#contact" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-custom shadow-lg hover:shadow-primary/30 hover:shadow-xl hover:-translate-y-1">
-              联系我
-            </a>
-            <a href="#projects" class="px-8 py-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 rounded-lg font-medium transition-custom hover:-translate-y-1">
-              查看我的项目
-            </a>
-          </div>
         </div>
+      </article>
+    </section>
 
-        <div class="flex justify-center md:justify-end" data-aos="fade-left">
-          <div class="relative">
-            <!-- 证件照（5.jpg）+ 旋转渐变边框 -->
-            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden 
-                        border-4 border-transparent 
-                        bg-gradient-to-r from-primary to-secondary 
-                        animate-spin-slow">
-              <img src="5.jpg" alt="罗杰的证件照" class="w-full h-full object-cover">
-            </div>
-            <div class="absolute -bottom-4 -right-4 bg-primary text-white p-4 rounded-lg shadow-lg">
-              <p class="font-bold">数据领域</p>
-            </div>
-          </div>
-        </div>
+    <!-- 技能卡：3D翻转 -->
+    <section id="skills" data-aos="fade-up">
+      <div class="mb-5 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">核心技能</h2>
+        <p class="text-sm text-slate-300">悬停卡片查看详情</p>
       </div>
-
-      <!-- 滚动提示 -->
-      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-        <a href="#about" class="flex flex-col items-center">
-          <span class="mb-2 text-sm">向下滚动</span>
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 关于我 -->
-  <section id="about" class="py-20 bg-white section-gap">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">关于我</h2>
-        <div class="w-20 h-1 bg-primary mx-auto"></div>
-      </div>
-      <div class="grid md:grid-cols-3 gap-10 items-center">
-        <div class="md:col-span-1" data-aos="fade-right">
-          <div class="relative">
-            <!-- 手心绿植（1.jpg） -->
-            <img src="1.jpg" alt="手心绿植呼应数据生命力" class="max-w-xs h-auto rounded-lg shadow-xl mx-auto">
-          </div>
-        </div>
-        <div class="md:col-span-2" data-aos="fade-left">
-          <h3 class="text-2xl font-semibold mb-2 text-gray-800">数据开发工程师</h3>
-          <p class="text-gray-500 text-sm mb-6">专注于数据仓库建设与大数据处理</p>
-          
-          <p class="text-gray-600 mb-6 leading-relaxed">
-            我是重庆工商大学大数据管理与应用专业的学生，对数据处理、分析及数仓搭建兴趣浓厚。目前在艾瑞数智数据开发岗位实习。
-          </p>
-          <p class="text-gray-600 mb-8 leading-relaxed">
-            技术栈以 SQL、Python 为核心，精通 Hadoop 生态数据库（如 Hive和Gbase），掌握数仓建模逻辑，具备企业级数据开发实践经验。
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-            <div class="flex items-start">
-              <div class="text-primary text-xl mr-4 mt-1">
-                <i class="fa fa-database"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold mb-2">数据开发</h4>
-                <p class="text-gray-600 text-sm">熟练编写复杂SQL，熟悉Hive/GBase等数据库</p>
-              </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        <article class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-face glass rounded-2xl p-6">
+              <p class="text-sm text-neon">Frontend</p>
+              <h3 class="mt-2 text-xl font-semibold">React / Vue / TS</h3>
+              <p class="mt-3 text-slate-300">组件化、状态管理、工程化构建</p>
             </div>
-            <div class="flex items-start">
-              <div class="text-primary text-xl mr-4 mt-1">
-                <i class="fa fa-code"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold mb-2">Python开发</h4>
-                <p class="text-gray-600 text-sm">掌握Pandas、Scikit-learn等库进行数据处理与建模</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="text-primary text-xl mr-4 mt-1">
-                <i class="fa fa-sitemap"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold mb-2">数仓建模</h4>
-                <p class="text-gray-600 text-sm">具备数据仓库分层建模与开发经验</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="text-primary text-xl mr-4 mt-1">
-                <i class="fa fa-chart-line"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold mb-2">数据分析</h4>
-                <p class="text-gray-600 text-sm">能够进行业务数据提取与初步分析</p>
-              </div>
+            <div class="flip-face flip-back rounded-2xl border border-neon/30 bg-panel p-6">
+              <p class="text-sm text-neon">详细能力</p>
+              <p class="mt-3 text-sm leading-7 text-slate-300">具备中大型前端项目拆分经验，熟悉 Vite、性能指标治理、SSR 与可访问性策略。</p>
             </div>
           </div>
-          <a href="罗杰-数据开发工程师-简历.pdf" download class="inline-flex items-center px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-custom shadow-md hover:shadow-lg hover:-translate-y-1">
-            下载我的简历
-            <i class="fa fa-download ml-2"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 技能 -->
-  <section id="skills" class="py-20 bg-gray-100 section-gap">
-    <div class="container mx-auto px-4 md:px-12">
-      <div class="text-center mb-16">
-        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">我的技能</h2>
-        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          聚焦数据开发、数仓领域，掌握多样数据工具，覆盖数据处理全流程需求
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-16">
-        <!-- 技术技能 -->
-        <div data-aos="fade-right">
-          <h3 class="text-2xl font-semibold mb-8 text-gray-800">技术技能</h3>
-          <div class="space-y-6">
-            <div>
-              <div class="font-medium text-gray-700 mb-2">SQL & Hive</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 90%"></div>
-              </div>
+        </article>
+        <article class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-face glass rounded-2xl p-6">
+              <p class="text-sm text-lime">Product</p>
+              <h3 class="mt-2 text-xl font-semibold">需求拆解与交互</h3>
+              <p class="mt-3 text-slate-300">流程梳理、原型设计、指标定义</p>
             </div>
-            <div>
-              <div class="font-medium text-gray-700 mb-2">Python</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="font-medium text-gray-700 mb-2">数据仓库建模</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 80%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="font-medium text-gray-700 mb-2">Hadoop生态</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="font-medium text-gray-700 mb-2">Spark/Flink</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 70%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="font-medium text-gray-700 mb-2">ETL流程</div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
-              </div>
+            <div class="flip-face flip-back rounded-2xl border border-lime/30 bg-panel p-6">
+              <p class="text-sm text-lime">详细能力</p>
+              <p class="mt-3 text-sm leading-7 text-slate-300">能将模糊需求转化为可执行任务，沉淀决策文档和复盘机制，降低跨团队沟通成本。</p>
             </div>
           </div>
-        </div>
-
-        <!-- 工具与方法 -->
-        <div data-aos="fade-left">
-          <h3 class="text-2xl font-semibold mb-8 text-gray-800">工具与方法</h3>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-custom hover:-translate-y-1">
-              <div class="text-primary text-3xl mb-3">
-                <i class="fa fa-database"></i>
-              </div>
-              <h4 class="font-semibold mb-2">DACP数据平台</h4>
-              <p class="text-gray-600 text-sm">数据开发与管理平台</p>
+        </article>
+        <article class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-face glass rounded-2xl p-6">
+              <p class="text-sm text-fire">Data</p>
+              <h3 class="mt-2 text-xl font-semibold">可视化与分析</h3>
+              <p class="mt-3 text-slate-300">埋点、看板、A/B 验证</p>
             </div>
-            <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-custom hover:-translate-y-1">
-              <div class="text-primary text-3xl mb-3">
-                <i class="fa fa-exchange"></i>
-              </div>
-              <h4 class="font-semibold mb-2">数据交换</h4>
-              <p class="text-gray-600 text-sm">数据导出与交换工具</p>
-            </div>
-            <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-custom hover:-translate-y-1">
-              <div class="text-primary text-3xl mb-3">
-                <i class="fa fa-tags"></i>
-              </div>
-              <h4 class="font-semibold mb-2">标签设计</h4>
-              <p class="text-gray-600 text-sm">用户画像标签体系设计</p>
-            </div>
-            <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-custom hover:-translate-y-1">
-              <div class="text-primary text-3xl mb-3">
-                <i class="fa fa-bar-chart"></i>
-              </div>
-              <h4 class="font-semibold mb-2">数据分析</h4>
-              <p class="text-gray-600 text-sm">数据提取与初步分析</p>
-            </div>
-            <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-custom hover:-translate-y-1">
-              <div class="text-primary text-3xl mb-3">
-                <i class="fa fa-code"></i>
-              </div>
-              <h4 class="font-semibold mb-2">代码固化</h4>
-              <p class="text-gray-600 text-sm">SQL代码优化与固化</p>
-            </div>
-            <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-custom hover:-translate-y-1">
-              <div class="text-primary text-3xl mb-3">
-                <i class="fa fa-cogs"></i>
-              </div>
-              <h4 class="font-semibold mb-2">数仓建模</h4>
-              <p class="text-gray-600 text-sm">数据仓库模型设计</p>
+            <div class="flip-face flip-back rounded-2xl border border-fire/30 bg-panel p-6">
+              <p class="text-sm text-fire">详细能力</p>
+              <p class="mt-3 text-sm leading-7 text-slate-300">熟悉业务指标体系搭建，能基于数据提出迭代优先级并验证效果。</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 工作经验 -->
-  <section id="experience" class="py-20 bg-white section-gap">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">工作经验</h2>
-        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          在艾瑞数智的实习经历让我积累了丰富的数据开发实践经验
-        </p>
+    <!-- 项目卡：3D翻转 -->
+    <section id="projects" data-aos="fade-up">
+      <div class="mb-5 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">代表项目</h2>
+        <p class="text-sm text-slate-300">Hover 了解项目贡献</p>
       </div>
-
-      <div class="relative max-w-4xl mx-auto px-4">
-        <!-- 时间线 -->
-        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"></div>
-
-        <!-- 经验条目 -->
-        <div class="space-y-20">
-          <!-- 实习经历 -->
-          <div class="md:grid md:grid-cols-2 gap-24 items-center" data-aos="fade-right">
-            <div class="md:text-right md:pr-12 order-2 md:order-1">
-              <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
-                2025年05月 - 2025年10月
-              </span>
-              <h3 class="text-2xl font-semibold mb-2 text-gray-800">数据开发实习生</h3>
-              <h4 class="text-xl text-gray-600 mb-4">艾瑞数智</h4>
-              <p class="text-gray-600 mb-4">
-                在市场经营部门实习，核心处理重庆移动存量运营数据，涵盖用户属性、地域分布、业务类型等多类维表，及大型活动成效、用户通信详单、APP使用行为等多类事实表。
-              </p>
-              <div class="flex flex-wrap justify-end gap-2">
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">SQL</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">DACP</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">数据交换</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">用户画像</span>
-              </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        <article class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-face rounded-2xl border border-slate-700 bg-cover bg-center p-6" style="background-image: linear-gradient(to top, rgba(7, 16, 29, .92), rgba(7, 16, 29, .4)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80');">
+              <h3 class="text-xl font-semibold">运营后台重构</h3>
+              <p class="mt-3 text-sm text-slate-200">重构权限、工单与报表模块，提升协作效率。</p>
             </div>
-
-            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-white"></div>
-            
-            <!-- 双萌娃（2.jpg） -->
-            <div class="order-1 md:order-2 relative mt-8 md:mt-0 md:pl-12">
-              <img src="2.jpg" alt="需求沟通现场" class="w-full h-auto rounded-lg shadow-lg object-cover">
+            <div class="flip-face flip-back rounded-2xl border border-neon/30 bg-panel p-6">
+              <p class="text-sm text-neon">结果</p>
+              <p class="mt-3 text-sm leading-7 text-slate-300">页面首屏耗时下降 38%，缺陷率下降 29%，支持多角色并发配置，减少运营沟通回合。</p>
             </div>
           </div>
-
-          <!-- 主要工作内容 -->
-          <div class="md:grid md:grid-cols-2 gap-24 items-center" data-aos="fade-left">
-            <div class="relative md:pr-12">
-              <!-- 桶盖萌娃（3.jpg）+ 旋转动画 -->
-              <div class="w-full overflow-hidden rounded-full shadow-lg border-2 border-primary/20 animate-spin-slow">
-                <img src="4.jpg" alt="数仓建模场景" class="w-full h-auto">
-              </div>
+        </article>
+        <article class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-face rounded-2xl border border-slate-700 bg-cover bg-center p-6" style="background-image: linear-gradient(to top, rgba(7, 16, 29, .92), rgba(7, 16, 29, .4)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');">
+              <h3 class="text-xl font-semibold">数据驾驶舱</h3>
+              <p class="mt-3 text-sm text-slate-200">统一业务核心指标并沉淀预警看板。</p>
             </div>
-
-            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-white"></div>
-
-            <div class="mt-8 md:mt-0 md:pl-12">
-              <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
-                2025年05月 - 2025年10月
-              </span>
-              <h3 class="text-2xl font-semibold mb-2 text-gray-800">主要工作内容</h3>
-              <p class="text-gray-600 mb-4">
-                <ul class="list-disc pl-5 text-gray-600 mb-4">
-                  <li>编写 SQL 满足各类业务需求，涉及多张维表与事实表关联</li>
-                  <li>依托数据中台实现模型与程序的分层固化，重点应用 DW 层与 ST 层</li>
-                  <li>在数据中台配置数据交换接口（DataX），完成跨数据库表同步</li>
-                  <li>配置多维度用户画像标签，持续更新用户特征</li>
-                </ul>
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">多表关联</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">数据中台</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">DataX</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">分层建模</span>
-              </div>
+            <div class="flip-face flip-back rounded-2xl border border-lime/30 bg-panel p-6">
+              <p class="text-sm text-lime">结果</p>
+              <p class="mt-3 text-sm leading-7 text-slate-300">实现分钟级数据刷新，异常监测时效提升 50%+，帮助团队更快完成策略调整。</p>
             </div>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 项目展示 -->
-  <section id="projects" class="py-20 bg-gray-100 section-gap">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">项目展示</h2>
-        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          以下是我参与开发的一些数据相关项目
-        </p>
+    <!-- 兴趣互动模块 -->
+    <section id="hobbies" data-aos="fade-up">
+      <div class="mb-5 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">兴趣与状态</h2>
+        <p class="text-sm text-slate-300">卡片悬停可查看额外记录</p>
       </div>
-
-      <div class="grid md:grid-cols-1 gap-12 max-w-4xl mx-auto">
-        <!-- 信用卡欺诈检测项目 - 修复图片显示 -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
-          <div class="md:flex">
-            <div class="md:flex-shrink-0 md:w-1/3 h-64 md:h-auto">
-              <div class="project-img-container">
-                <!-- 修复图片路径和显示问题 -->
-                <img src="7.jpg" alt="信用卡欺诈检测项目" class="project-img rounded-l-xl">
-              </div>
-            </div>
-            <div class="p-8">
-              <div class="uppercase tracking-wide text-sm text-primary font-semibold">机器学习项目</div>
-              <h3 class="text-2xl font-semibold mt-2 text-gray-800">信用卡欺诈检测系统</h3>
-              <p class="mt-4 text-gray-600">
-                基于高度不平衡(欺诈样本0.172%)的欧洲信用卡交易数据(28.5万条)，系统性实施特征工程：重构Time为Hour/Day时序特征，应用LogAmount对数变换和RobustScaler标准化金额特征。设计Stacking集成学习框架，通过五折分层交叉验证生成OOF预测作为元特征，避免数据泄露。模型在测试集上达到AUC 0.9768、召回率81.63%、精确率80%、误报率0.035%。
-              </p>
-              <div class="mt-6">
-                <h4 class="font-semibold text-gray-700 mb-2">技术栈:</h4>
-                <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Python</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Scikit-learn</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">SMOTE</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Stacking集成</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">特征工程</span>
-                </div>
-              </div>
-              <div class="mt-6">
-                <h4 class="font-semibold text-gray-700 mb-2">项目成果:</h4>
-                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                  <li>AUC-ROC: 0.9768，召回率: 81.63%，精确率: 80%</li>
-                  <li>较单一模型(XGBoost/随机森林)召回率提升9-16个百分点</li>
-                  <li>完成模型工程化准备，实现预处理流水线和预测模型的持久化</li>
-                </ul>
-              </div>
-            </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        <!-- 跑步：SVG路径动画 + 动态计步 -->
+        <article class="group glass rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">跑步</h3>
+            <span class="text-xs text-lime">年度打卡</span>
           </div>
-        </div>
+          <svg viewBox="0 0 220 80" class="mt-3 h-20 w-full">
+            <path d="M10 55 C50 10, 90 70, 130 30 S200 15,210 40" fill="none" stroke="#2A3E5D" stroke-width="3"></path>
+            <path class="runner-path" d="M10 55 C50 10, 90 70, 130 30 S200 15,210 40" fill="none" stroke="#A6FF00" stroke-width="3"></path>
+          </svg>
+          <p class="mt-3 text-3xl font-bold text-lime" id="stepCounter">0</p>
+          <p class="text-xs text-slate-300">累计步数（模拟动态）</p>
+          <div class="mt-3 hidden rounded-lg border border-lime/30 bg-lime/10 p-2 text-xs text-lime group-hover:block">5km PB: 22'48'' | 月均跑量: 86km</div>
+        </article>
 
-        <!-- 实时评论分析系统项目 - 修复图片显示 -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
-          <div class="md:flex">
-            <div class="md:flex-shrink-0 md:w-1/3 h-64 md:h-auto">
-              <div class="project-img-container">
-                <!-- 修复图片路径和显示问题 -->
-                <img src="6.jpg" alt="实时评论分析系统" class="project-img rounded-l-xl">
-              </div>
-            </div>
-            <div class="p-8">
-              <div class="uppercase tracking-wide text-sm text-primary font-semibold">实时流处理项目</div>
-              <h3 class="text-2xl font-semibold mt-2 text-gray-800">实时评论分析系统</h3>
-              <p class="mt-4 text-gray-600">
-                设计实时数据处理架构，基于Kafka+Redis构建评论分析流水线，实现从数据采集、实时处理到可视化展示的全链路部署。采用Kafka消息队列解耦系统组件，设计消费组策略与重试机制保障数据可靠传输；利用Redis Hash结构存储实时统计，List结构缓存处理记录，优化查询性能。通过Docker容器化部署Kafka和Zookeeper，解决Windows环境下大数据组件的依赖冲突与环境隔离问题。
-              </p>
-              <div class="mt-6">
-                <h4 class="font-semibold text-gray-700 mb-2">技术栈:</h4>
-                <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Kafka</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Redis</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Docker</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Streamlit</span>
-                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">实时处理</span>
-                </div>
-              </div>
-              <div class="mt-6">
-                <h4 class="font-semibold text-gray-700 mb-2">项目特点:</h4>
-                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                  <li>基于Kafka+Redis构建实时数据处理流水线</li>
-                  <li>使用Docker容器化解决环境兼容性问题</li>
-                  <li>完整的流处理架构设计与实现</li>
-                  <li>基于Streamlit开发交互式可视化看板</li>
-                </ul>
-              </div>
-            </div>
+        <!-- 篮球：投篮小游戏 -->
+        <article class="group glass rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">篮球</h3>
+            <span class="text-xs text-fire">互动投篮</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 教育背景 -->
-  <section id="education" class="py-20 bg-gray-100 section-gap">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-gray-900 mb-4">教育背景</h2>
-        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          我的学术经历为我的职业发展奠定了坚实的基础
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-1 gap-10 max-w-3xl mx-auto">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-custom hover:-translate-y-2" data-aos="fade-up">
-          <div class="h-2 bg-primary"></div>
-          <div class="p-8">
-            <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
-              2022年 - 2026年
-            </span>
-            <h3 class="text-2xl font-semibold mb-2 text-gray-800">大数据管理与应用</h3>
-            <h4 class="text-xl text-gray-600 mb-6">重庆工商大学</h4>
-            <p class="text-gray-600 mb-6">
-              主修大数据管理与应用专业，系统学习了数据库原理、Hadoop技术栈、Python编程、机器学习、统计学、Tableau可视化分析等核心课程。通过深入的课程学习和丰富的实践活动，掌握了从数据采集、清洗、存储到分析与可视化的全流程技能。
-            </p>
-            <div class="flex items items-center text-gray-500">
-              <i class="fa fa-graduation-cap mr-2"></i>
-              <span>本科在读</span>
-            </div>
+          <div class="relative mt-4 h-32 overflow-hidden rounded-xl border border-slate-700 bg-ink">
+            <div id="hoop" class="absolute right-3 top-8 h-12 w-10 border-4 border-fire/90 border-t-0"></div>
+            <div id="ball" class="ball absolute bottom-3 left-4 h-6 w-6 rounded-full bg-orange-400"></div>
           </div>
-        </div>
-      </div>
-
-      <!-- 证书 -->
-      <div class="mt-16">
-        <h3 class="text-2xl font-semibold mb-8 text-center text-gray-800">证书与认证</h3>
-        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
-            <div class="text-primary text-2xl mr-4">
-              <i class="fa fa-certificate"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-1">大学英语四级</h4>
-              <p class="text-gray-600">具备良好的英语阅读和书写能力</p>
-            </div>
+          <div class="mt-3 flex items-center justify-between">
+            <button id="shootBtn" class="fx-btn rounded-lg border border-fire/40 px-3 py-1 text-xs">投篮</button>
+            <p class="text-sm text-slate-300">命中：<span id="basketScore" class="font-semibold text-fire">0</span></p>
           </div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
-            <div class="text-primary text-2xl mr-4">
-              <i class="fa fa-trophy"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-1">艾瑞数智实习认证</h4>
-              <p class="text-gray-600">完成数据开发实习项目并获得认证</p>
-            </div>
+          <div class="mt-3 hidden rounded-lg border border-fire/30 bg-fire/10 p-2 text-xs text-fire group-hover:block">半场最高纪录：31 分 | 三分命中率：42%</div>
+        </article>
+
+        <!-- 游戏：像素头像墙 -->
+        <article class="group glass rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">游戏</h3>
+            <span class="text-xs text-neon">像素互动</span>
           </div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
-            <div class="text-primary text-2xl mr-4">
-              <i class="fa fa-code"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-1">数据开发项目认证</h4>
-              <p class="text-gray-600">完成多个数据开发与机器学习项目</p>
-            </div>
+          <div class="pixel-box mt-4 grid grid-cols-4 gap-2 rounded-xl border border-slate-700 p-2">
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🧙</button>
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🛡️</button>
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🚀</button>
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">⚔️</button>
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🎮</button>
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🧠</button>
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🐉</button>
+            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">⭐</button>
           </div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-md flex items-start hover:shadow-lg transition-shadow">
-            <div class="text-primary text-2xl mr-4">
-              <i class="fa fa-graduation-cap"></i>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-1">学术成就</h4>
-              <p class="text-gray-600">学年论文《基于Stacking集成学习的信用卡欺诈预测》</p>
-            </div>
+          <div class="mt-3 hidden rounded-lg border border-neon/30 bg-neon/10 p-2 text-xs text-neon group-hover:block">赛季段位：钻石 | 团队模式胜率：63%</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 外部接口模块 -->
+    <section id="integrations" data-aos="fade-up">
+      <div class="mb-5 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">外部接口与内容联动</h2>
+        <p class="text-sm text-slate-300">B 站 / GitHub / RSS</p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        <!-- B站视频嵌入 -->
+        <article class="glass rounded-2xl p-5">
+          <h3 class="text-lg font-semibold">B 站视频</h3>
+          <div class="mt-4 overflow-hidden rounded-xl border border-slate-700">
+            <iframe
+              class="aspect-video w-full"
+              src="https://player.bilibili.com/player.html?bvid=BV1GJ411x7h7&page=1&high_quality=1&danmaku=0"
+              scrolling="no"
+              frameborder="0"
+              allowfullscreen="true">
+            </iframe>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </article>
 
-  <!-- 技术分享 -->
-  <section class="py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">学习日记分享</h2>
-        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-        <p class="text-gray-600 max-w-2xl mx-auto">记录学习与项目中的技术思考</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-custom">
-          <h3 class="font-semibold mb-2">Stacking集成学习实践</h3>
-          <p class="text-gray-600 text-sm mb-4">信用卡欺诈检测项目中的模型构建经验</p>
-          <span class="text-primary text-sm">阅读更多 →</span>
-        </div>
-        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-custom">
-          <h3 class="font-semibold mb-2">数据仓库分层建模</h3>
-          <p class="text-gray-600 text-sm mb-4">企业级数据仓库设计与实施经验</p>
-          <span class="text-primary text-sm">阅读更多 →</span>
-        </div>
-        <div class="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-custom">
-          <h3 class="font-semibold mb-2">实时数据处理架构</h3>
-          <p class="text-gray-600 text-sm mb-4">Kafka+Redis流式处理系统设计</p>
-          <span class="text-primary text-sm">阅读更多 →</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 联系我 -->
-  <section id="contact" class="py-20 bg-gray-900 text-white section-gap">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">联系我</h2>
-        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-        <p class="text-gray-400 max-w-2xl mx-auto">
-          无论您有任何问题或合作意向，都可以通过以下方式联系我，我会尽快回复您
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- 联系信息 -->
-        <div data-aos="fade-right">
-          <div class="bg-gray-800 p-8 rounded-xl h-full relative">
-            <h3 class="text-2xl font-semibold mb-6">联系方式</h3>
-
-            <div class="space-y-6">
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-                  <i class="fa fa-envelope"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">邮箱</h4>
-                  <p class="text-gray-400">luojie16@ctbu.edu.cn</p>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-                  <i class="fa fa-phone"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">电话</h4>
-                  <p class="text-gray-400">17823896729</p>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-                  <i class="fa fa-map-marker"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">地址</h4>
-                  <p class="text-gray-400">重庆工商大学</p>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <div class="text-primary text-xl mr-4 mt-1 w-8 flex-shrink-0">
-                  <i class="fa fa-graduation-cap"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">教育背景</h4>
-                  <p class="text-gray-400">大数据管理与应用专业</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-10">
-              <h4 class="font-semibold mb-4">社交媒体</h4>
-              <div class="flex space-x-4">
-                <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-primary transition-custom">
-                  <i class="fa fa-github"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-primary transition-custom">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-primary transition-custom">
-                  <i class="fa fa-weixin"></i>
-                </a>
-              </div>
-            </div>
+        <!-- GitHub 仓库动态展示 -->
+        <article class="glass rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">GitHub 仓库</h3>
+            <a href="https://github.com/Roger6172" target="_blank" rel="noreferrer" class="text-xs text-neon hover:underline">查看主页</a>
           </div>
-        </div>
-
-        <!-- 金数据表单 -->
-        <div data-aos="fade-left">
-          <div class="bg-white p-8 rounded-xl text-gray-800">
-            <h3 class="text-2xl font-semibold mb-6">发送消息</h3>
-            <!-- 金数据表单嵌入代码 -->
-            <script src="https://jsj.top/f/JxE2so/embedded.js?inner_redirect=false&banner=hide&background=white&height=768"></script>
+          <div id="githubRepos" class="mt-4 space-y-3 text-sm text-slate-300">
+            <p>加载仓库中...</p>
           </div>
-        </div>
+        </article>
       </div>
+      <article class="glass mt-5 rounded-2xl p-5">
+        <!-- 知乎/博客 RSS 最新文章列表 -->
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold">知乎 / 博客 RSS</h3>
+          <span class="text-xs text-slate-400">自动抓取最新内容</span>
+        </div>
+        <div id="rssList" class="mt-4 grid gap-3 md:grid-cols-2">
+          <p class="text-sm text-slate-300">加载文章中...</p>
+        </div>
+      </article>
+    </section>
 
-      <!-- 底部比耶萌娃（4.jpg）+ 旋转效果 -->
-      <div class="flex justify-center mt-16">
-        <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-transparent 
-                    bg-gradient-to-r from-primary to-secondary 
-                    animate-spin-slow">
-          <img src="3.jpg" alt="比耶萌娃" class="w-full h-full object-cover">
-        </div>
+    <!-- 金数据发送消息 -->
+    <section id="contact" class="pb-16" data-aos="fade-up">
+      <div class="mb-5 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">发送消息</h2>
+        <p class="text-sm text-slate-300">保留金数据表单入口</p>
       </div>
-    </div>
-  </section>
+      <div class="grid gap-5 md:grid-cols-2">
+        <article class="glass rounded-2xl p-5">
+          <h3 class="text-lg font-semibold">快速联系</h3>
+          <p class="mt-3 text-sm text-slate-300">欢迎留下你的项目背景、目标和预期时间，我会在 24 小时内回复。</p>
+          <div class="mt-5 space-y-3 text-sm text-slate-300">
+            <p>微信：Roger_Studio</p>
+            <p>邮箱：roger@example.com</p>
+            <p>可协作方向：Web 应用、产品设计、性能优化</p>
+          </div>
+          <a href="#hero" class="fx-btn mt-5 inline-block rounded-lg border border-neon/40 px-4 py-2 text-sm">回到顶部</a>
+        </article>
+        <article class="glass rounded-2xl p-5">
+          <h3 class="text-lg font-semibold">金数据表单</h3>
+          <!-- TODO: 将 src 替换为你原有的金数据表单地址，以保留原“发送消息”能力 -->
+          <iframe
+            title="金数据表单"
+            src="https://jinshuju.net/f/your-form-id"
+            class="mt-4 h-80 w-full rounded-xl border border-slate-700 bg-ink"
+            loading="lazy">
+          </iframe>
+        </article>
+      </div>
+    </section>
+  </main>
 
-  <!-- 页脚 -->
-  <footer class="bg-gray-800 text-white py-8 mt-10">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-6 md:mb-0">
-          <a href="#" class="text-2xl font-bold">
-            <span class="text-primary">罗</span>杰
-          </a>
-          <p class="text-gray-400 mt-2">数据开发/数仓开发工程师</p>
-        </div>
-        <div class="text-gray-400 text-sm">
-          &copy; 2025 罗杰. 保留所有权利.
-        </div>
-      </div>
-      <div class="mt-4 text-center md:text-right text-xs text-gray-500">
-        本网站使用 Tailwind CSS 和 Font Awesome 图标库构建
-      </div>
-    </div>
+  <footer class="border-t border-slate-800/80 py-6 text-center text-xs text-slate-400">
+    <p>© <span id="currentYear"></span> Roger · Built with Tailwind CSS · Interactive Resume</p>
   </footer>
 
-  <!-- 返回顶部按钮 -->
-  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
-    <i class="fa fa-chevron-up"></i>
-  </button>
-
-  <!-- JavaScript -->
   <script>
-    // 导航栏滚动效果
-    const navbar = document.getElementById('navbar');
-    const backToTop = document.getElementById('back-to-top');
+    // 初始化：滚动动画
+    AOS.init({
+      duration: 850,
+      offset: 70,
+      easing: "ease-out-cubic",
+      once: true
+    });
 
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 50) {
-        navbar.classList.add('bg-gray-900/95', 'backdrop-blur-sm', 'shadow-md');
-        navbar.classList.remove('bg-transparent');
-        backToTop.classList.remove('opacity-0', 'invisible');
-        backToTop.classList.add('opacity-100', 'visible');
-      } else {
-        navbar.classList.remove('bg-gray-900/95', 'backdrop-blur-sm', 'shadow-md');
-        navbar.classList.add('bg-transparent');
-        backToTop.classList.add('opacity-0', 'invisible');
-        backToTop.classList.remove('opacity-100', 'visible');
+    // 初始化：英雄区粒子效果
+    tsParticles.load("particles-hero", {
+      background: { color: { value: "transparent" } },
+      fpsLimit: 60,
+      particles: {
+        number: { value: 48, density: { enable: true, area: 900 } },
+        color: { value: ["#00D4FF", "#A6FF00", "#FF6A00"] },
+        links: { enable: true, distance: 130, color: "#3A5A88", opacity: 0.35, width: 1 },
+        move: { enable: true, speed: 1.2 },
+        opacity: { value: 0.65 },
+        size: { value: { min: 1, max: 3 } }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          resize: true
+        },
+        modes: { repulse: { distance: 80, duration: 0.25 } }
       }
     });
 
-    // 移动端菜单切换
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
+    // 滚动视差
+    const parallaxTargets = document.querySelectorAll("[data-parallax]");
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY;
+      parallaxTargets.forEach((item) => {
+        const speed = Number(item.dataset.parallax || 0.1);
+        item.style.transform = "translateY(" + y * speed + "px)";
+      });
+    }, { passive: true });
 
-    menuToggle.addEventListener('click', function() {
-      mobileMenu.classList.toggle('hidden');
-      const icon = menuToggle.querySelector('i');
-      if (icon.classList.contains('fa-bars')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
+    // 鼠标光晕与尾迹
+    const cursorGlow = document.getElementById("cursorGlow");
+    let trailTick = 0;
+    document.addEventListener("pointermove", (event) => {
+      cursorGlow.style.left = event.clientX + "px";
+      cursorGlow.style.top = event.clientY + "px";
+      trailTick += 1;
+      if (trailTick % 3 !== 0) return;
+      const dot = document.createElement("span");
+      dot.className = "trail-dot";
+      dot.style.left = event.clientX + "px";
+      dot.style.top = event.clientY + "px";
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 600);
     });
 
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (!mobileMenu.classList.contains('hidden')) {
-          mobileMenu.classList.add('hidden');
-          const icon = menuToggle.querySelector('i');
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
+    // 跑步计步数字动画
+    const stepCounter = document.getElementById("stepCounter");
+    const targetSteps = 2680000;
+    let currentSteps = 0;
+    function animateSteps() {
+      if (currentSteps >= targetSteps) return;
+      currentSteps += Math.ceil((targetSteps - currentSteps) / 18);
+      stepCounter.textContent = currentSteps.toLocaleString("zh-CN");
+      requestAnimationFrame(animateSteps);
+    }
+    animateSteps();
+
+    // 篮球互动小游戏
+    const ball = document.getElementById("ball");
+    const scoreText = document.getElementById("basketScore");
+    let score = 0;
+    document.getElementById("shootBtn").addEventListener("click", () => {
+      ball.classList.remove("shoot");
+      void ball.offsetWidth;
+      ball.classList.add("shoot");
+      const hit = Math.random() > 0.42;
+      if (hit) {
+        score += 1;
+        scoreText.textContent = String(score);
+      }
+      setTimeout(() => {
+        ball.classList.remove("shoot");
+      }, 720);
+    });
+
+    // GitHub 仓库拉取
+    async function loadGitHubRepos() {
+      const container = document.getElementById("githubRepos");
+      try {
+        const response = await fetch("https://api.github.com/users/Roger6172/repos?sort=updated&per_page=6");
+        if (!response.ok) throw new Error("GitHub API Error");
+        const repos = await response.json();
+        const validRepos = repos.filter((repo) => !repo.fork).slice(0, 4);
+        if (!validRepos.length) throw new Error("No Repo");
+        container.innerHTML = validRepos.map((repo) => {
+          const lang = repo.language || "Unknown";
+          return (
+            '<a class="block rounded-xl border border-slate-700 p-3 transition hover:border-neon/50 hover:bg-slate-800/50" target="_blank" rel="noreferrer" href="' + repo.html_url + '">' +
+              '<div class="flex items-center justify-between">' +
+                '<p class="font-semibold text-slate-100">' + repo.name + "</p>" +
+                '<p class="text-xs text-slate-400">' + lang + "</p>" +
+              "</div>" +
+              '<p class="mt-1 line-clamp-2 text-xs text-slate-300">' + (repo.description || "暂无描述") + "</p>" +
+            "</a>"
+          );
+        }).join("");
+      } catch (error) {
+        container.innerHTML = '<p class="rounded-xl border border-slate-700 p-3 text-xs text-slate-300">仓库加载失败，请稍后刷新或检查 GitHub 用户名。</p>';
+      }
+    }
+
+    // RSS 文章抓取（知乎/博客）
+    async function loadRssArticles() {
+      const container = document.getElementById("rssList");
+      const feedSources = [
+        { name: "博客", url: "https://rsshub.app/github/issue/Roger6172/Roger6172.github.io" },
+        { name: "知乎", url: "https://rsshub.app/zhihu/people/roger6172/posts" }
+      ];
+      const cards = [];
+      for (const source of feedSources) {
+        try {
+          const endpoint = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(source.url);
+          const response = await fetch(endpoint);
+          if (!response.ok) throw new Error("rss2json error");
+          const data = await response.json();
+          const items = (data.items || []).slice(0, 2);
+          if (!items.length) continue;
+          items.forEach((item) => {
+            cards.push(
+              '<a class="block rounded-xl border border-slate-700 p-3 transition hover:border-lime/50 hover:bg-slate-800/50" href="' + item.link + '" target="_blank" rel="noreferrer">' +
+                '<p class="text-xs text-lime">' + source.name + "</p>" +
+                '<p class="mt-1 text-sm font-medium text-slate-100">' + item.title + "</p>" +
+                '<p class="mt-1 text-xs text-slate-400">' + (item.pubDate || "").slice(0, 10) + "</p>" +
+              "</a>"
+            );
           });
+        } catch (error) {
+          continue;
         }
-      });
-    });
-
-    // 返回顶部
-    backToTop.addEventListener('click', function() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-    // 滚动动画效果
-    const animateOnScroll = () => {
-      const elements = document.querySelectorAll('[data-aos]');
-      elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('opacity-100', 'translate-y-0');
-          element.classList.remove('opacity-0', 'translate-y-8');
-        }
-      });
-    };
-
-    // 初始化动画元素
-    document.querySelectorAll('[data-aos]').forEach(element => {
-      element.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
-      if (element.getAttribute('data-aos') === 'fade-right') {
-        element.classList.add('translate-x-8');
-        element.classList.remove('translate-y-8');
-      } else if (element.getAttribute('data-aos') === 'fade-left') {
-        element.classList.add('-translate-x-8');
-        element.classList.remove('translate-y-8');
       }
-    });
+      container.innerHTML = cards.length
+        ? cards.join("")
+        : '<p class="rounded-xl border border-slate-700 p-3 text-xs text-slate-300">RSS 暂不可用，请确认源地址或使用你自己的 RSSHub 地址。</p>';
+    }
 
-    // 监听滚动事件
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
+    document.getElementById("currentYear").textContent = String(new Date().getFullYear());
+    loadGitHubRepos();
+    loadRssArticles();
   </script>
 </body>
-
 </html>
