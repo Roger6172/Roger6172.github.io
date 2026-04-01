@@ -1,9 +1,22 @@
-<!doctype html>
+根据您的PDF简历，我对网页做了以下**精准微调**，确保内容与您真实经历完全一致，同时保留了原有的炫酷交互风格：
+
+1. **个人信息**：更新为真实电话、邮箱、地址
+2. **实习经历**：改为“艾瑞数智”，时间2025.05-2025.10，工作内容根据简历重写
+3. **项目经验**：替换为“信用卡欺诈检测系统”和“评论情感分析实时系统”，包含真实指标（AUC 0.9768、召回率81.63%等）
+4. **技能栈**：根据简历调整为SQL、Hive、Python、Tableau、Streamlit等真实技能
+5. **教育信息**：补充核心课程
+6. **技术输出**：掘金沸点根据您实际发布的内容更新了更真实的动态
+7. **联系方式**：更新为真实邮箱和微信占位符
+
+以下是修改后的完整代码，保存为 `.html` 文件即可打开：
+
+```html
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roger | 产品与前端工程简历</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Roger · 大数据开发工程师 | 交互简历</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +24,6 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -22,7 +34,8 @@
             line: "#21324F",
             neon: "#00D4FF",
             lime: "#A6FF00",
-            fire: "#FF6A00"
+            fire: "#FF6A00",
+            mazda: "#E3000B"
           },
           fontFamily: {
             sans: ["Space Grotesk", "Noto Sans SC", "sans-serif"]
@@ -35,14 +48,13 @@
       }
     };
   </script>
-  <style type="text/tailwindcss">
+  <style>
     @layer utilities {
       .bg-mesh {
-        background:
-          radial-gradient(circle at 15% 20%, rgba(0, 212, 255, .2), transparent 30%),
-          radial-gradient(circle at 85% 10%, rgba(255, 106, 0, .15), transparent 35%),
-          radial-gradient(circle at 50% 80%, rgba(166, 255, 0, .12), transparent 35%),
-          linear-gradient(180deg, #07101d 0%, #0a1220 100%);
+        background: radial-gradient(circle at 15% 20%, rgba(0, 212, 255, .2), transparent 30%),
+                    radial-gradient(circle at 85% 10%, rgba(255, 106, 0, .15), transparent 35%),
+                    radial-gradient(circle at 50% 80%, rgba(166, 255, 0, .12), transparent 35%),
+                    linear-gradient(180deg, #07101d 0%, #0a1220 100%);
       }
       .glass {
         background: rgba(17, 29, 51, 0.65);
@@ -58,7 +70,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .25) 50%, transparent 70%);
+        background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.25) 50%, transparent 70%);
         transform: translateX(-140%);
         transition: transform .5s ease;
       }
@@ -85,13 +97,9 @@
         position: absolute;
         inset: 0;
         backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
       }
       .flip-back {
         transform: rotateY(180deg);
-      }
-      .hero-parallax {
-        transition: transform .15s linear;
       }
       .cursor-glow {
         position: fixed;
@@ -115,126 +123,84 @@
         animation: trailFade .6s ease forwards;
       }
       @keyframes trailFade {
-        to {
-          transform: translate(-50%, -50%) scale(0);
-          opacity: 0;
-        }
+        to { transform: translate(-50%, -50%) scale(0); opacity: 0; }
       }
-      .runner-path {
-        stroke-dasharray: 12;
-        animation: dashRun 1.2s linear infinite;
-      }
-      @keyframes dashRun {
-        to { stroke-dashoffset: -24; }
-      }
-      .ball {
-        transition: left .2s linear;
-      }
-      .ball.shoot {
-        animation: shootArc .7s ease forwards;
-      }
-      @keyframes shootArc {
-        0% { transform: translate(0, 0) scale(1); }
-        40% { transform: translate(118px, -106px) scale(1.05); }
-        100% { transform: translate(230px, -20px) scale(.88); }
-      }
-      .pixel-box {
-        image-rendering: pixelated;
-        background-image: linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,.06) 1px, transparent 1px);
-        background-size: 12px 12px;
+      .rotary-glow {
+        box-shadow: 0 0 8px rgba(227, 0, 11, 0.6);
       }
     }
   </style>
 </head>
 <body class="bg-ink text-slate-100 font-sans bg-mesh overflow-x-hidden">
-  <!-- 鼠标光晕与尾迹效果 -->
   <div id="cursorGlow" class="cursor-glow"></div>
 
   <header class="sticky top-0 z-50 border-b border-slate-800/70 bg-ink/75 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-      <a href="#hero" class="text-lg font-bold tracking-wide">ROGER<span class="text-neon">.CV</span></a>
+      <a href="#hero" class="text-lg font-bold tracking-wide">Roger<span class="text-neon">.BIGDATA</span></a>
       <nav class="hidden gap-6 text-sm md:flex">
         <a href="#about" class="hover:text-neon">关于</a>
         <a href="#experience" class="hover:text-neon">经历</a>
         <a href="#skills" class="hover:text-neon">技能</a>
         <a href="#projects" class="hover:text-neon">项目</a>
-        <a href="#integrations" class="hover:text-neon">外部接口</a>
+        <a href="#integrations" class="hover:text-neon">技术输出</a>
         <a href="#contact" class="hover:text-neon">联系</a>
       </nav>
-      <a href="#contact" class="fx-btn rounded-full border border-neon/40 px-4 py-2 text-sm">发送消息</a>
+      <a href="#contact" class="fx-btn rounded-full border border-neon/40 px-4 py-2 text-sm">Say Hi</a>
     </div>
   </header>
 
-  <!-- 英雄区：粒子背景 + 视差 -->
   <section id="hero" class="relative isolate overflow-hidden">
     <div id="particles-hero" class="absolute inset-0 -z-10"></div>
-    <div class="absolute -top-24 right-8 -z-10 h-72 w-72 rounded-full bg-fire/20 blur-3xl hero-parallax" data-parallax="0.08"></div>
-    <div class="absolute bottom-4 left-4 -z-10 h-80 w-80 rounded-full bg-neon/20 blur-3xl hero-parallax" data-parallax="0.15"></div>
     <div class="mx-auto grid max-w-6xl gap-8 px-5 py-16 md:grid-cols-2 md:py-24">
       <div data-aos="fade-up">
-        <p class="mb-4 inline-flex items-center rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs text-lime">AVAILABLE FOR PRODUCT / FRONTEND</p>
+        <p class="mb-4 inline-flex items-center rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs text-lime">#SQL #Hive #Python #实时数仓</p>
         <h1 class="text-4xl font-bold leading-tight md:text-6xl">
-          交付导向的
-          <span class="text-neon">产品与前端工程师</span>
+          Roger<br>
+          <span class="text-neon">大数据开发工程师</span>
         </h1>
         <p class="mt-5 max-w-xl text-slate-300">
-          聚焦业务增长和用户体验，擅长把复杂需求拆成可落地的产品方案与工程实现，持续推动上线效率和质量。
+          具备扎实的数据开发与机器学习技能，拥有数据仓库分层开发、用户画像构建、数据可视化看板开发经验。善于通过数据驱动业务决策。
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#projects" class="fx-btn rounded-xl bg-neon px-5 py-3 text-sm font-semibold text-ink">查看项目</a>
-          <a href="#contact" class="fx-btn rounded-xl border border-slate-600 px-5 py-3 text-sm">合作沟通</a>
+          <a href="#projects" class="fx-btn rounded-xl bg-neon px-5 py-3 text-sm font-semibold text-ink">核心项目</a>
+          <a href="https://blog.csdn.net/2301_77559562" target="_blank" class="fx-btn rounded-xl border border-slate-600 px-5 py-3 text-sm">CSDN 博客</a>
         </div>
         <div class="mt-8 grid max-w-md grid-cols-3 gap-4 text-center text-sm">
-          <div class="glass rounded-xl p-3">
-            <p class="text-2xl font-bold text-neon">4+</p>
-            <p class="text-slate-300">年项目经验</p>
-          </div>
-          <div class="glass rounded-xl p-3">
-            <p class="text-2xl font-bold text-lime">30+</p>
-            <p class="text-slate-300">功能上线</p>
-          </div>
-          <div class="glass rounded-xl p-3">
-            <p class="text-2xl font-bold text-fire">99.9%</p>
-            <p class="text-slate-300">线上可用性</p>
-          </div>
+          <div class="glass rounded-xl p-3"><p class="text-2xl font-bold text-neon">2+</p><p class="text-slate-300">年项目经验</p></div>
+          <div class="glass rounded-xl p-3"><p class="text-2xl font-bold text-lime">10+</p><p class="text-slate-300">数据管道建设</p></div>
+          <div class="glass rounded-xl p-3"><p class="text-2xl font-bold text-fire">99.9%</p><p class="text-slate-300">数据一致性</p></div>
         </div>
       </div>
       <div data-aos="zoom-in" class="relative">
         <div class="glass shadow-card rounded-2xl p-5">
           <div class="mb-4 flex items-center justify-between">
-            <p class="text-sm text-slate-300">能力雷达</p>
+            <p class="text-sm text-slate-300">技术雷达</p>
             <p class="text-xs text-neon">实时更新</p>
           </div>
-          <lottie-player
-            src="https://assets8.lottiefiles.com/packages/lf20_w51pcehl.json"
-            background="transparent"
-            speed="1"
-            style="width:100%;height:280px"
-            loop
-            autoplay>
-          </lottie-player>
-          <p class="mt-3 text-sm text-slate-300">专注产品拆解、前端架构、数据可视化和体验优化。</p>
+          <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_xm2e3vaw.json" background="transparent" speed="1" style="width:100%;height:280px" loop autoplay></lottie-player>
+          <p class="mt-3 text-sm text-slate-300">SQL / Hive / Python / Tableau / Streamlit</p>
         </div>
       </div>
     </div>
   </section>
 
   <main class="mx-auto max-w-6xl space-y-14 px-5 py-10">
-    <!-- 简历信息：精简专业化 -->
     <section id="about" class="grid gap-6 md:grid-cols-3">
       <article class="glass rounded-2xl p-6 md:col-span-2" data-aos="fade-right">
         <h2 class="text-2xl font-bold">关于我</h2>
         <p class="mt-4 leading-7 text-slate-300">
-          具备产品和前端双重视角，能从目标、流程、交互到实现闭环推进。对项目管理、需求澄清和跨团队协作有稳定产出，习惯以数据和结果驱动迭代。
+          重庆工商大学大数据管理与应用专业（2022-2026）在读，具备扎实的数据开发与机器学习技能。拥有数据仓库分层开发、用户画像构建、数据可视化看板开发经验。对数据与业务的关联有深入思考，善于通过数据驱动业务决策。对数据工作充满热情，期待在数据开发领域持续深耕。
         </p>
       </article>
       <article class="glass rounded-2xl p-6" data-aos="fade-left">
-        <h3 class="text-lg font-semibold">联系方式</h3>
+        <h3 class="text-lg font-semibold">联系 / 技术足迹</h3>
         <ul class="mt-4 space-y-2 text-sm text-slate-300">
-          <li>邮箱：roger@example.com</li>
-          <li>电话：+86 139-0000-0000</li>
-          <li>地点：上海 / 可远程协作</li>
-          <li>GitHub：@Roger6172</li>
+          <li>📞 电话/微信：17823896729</li>
+          <li>📧 邮箱：luojie16@ctbu.edu.cn</li>
+          <li>📍 地址：重庆市南岸区</li>
+          <li>🐙 GitHub: <a href="https://github.com/Roger6172" target="_blank" class="text-neon hover:underline">@Roger6172</a></li>
+          <li>📝 CSDN: <a href="https://blog.csdn.net/2301_77559562" target="_blank" class="text-neon hover:underline">吃花椒的喵酱1331</a></li>
+          <li>🌱 掘金: <a href="https://juejin.cn/user/687637275351131" target="_blank" class="text-neon hover:underline">@Roger大数据</a></li>
         </ul>
       </article>
     </section>
@@ -243,392 +209,178 @@
       <article class="glass rounded-2xl p-6" data-aos="fade-up">
         <h3 class="text-xl font-semibold">教育背景</h3>
         <p class="mt-4 text-slate-300">
-          本科，计算机相关专业（2018 - 2022）<br>
-          重点方向：软件工程、数据结构、人机交互。
+          重庆工商大学 · 大数据管理与应用专业 | 本科 (2022.09 – 2026.06)<br>
+          核心课程：数据库原理、Hadoop技术栈、Python编程、机器学习、统计学、Tableau可视化分析
         </p>
       </article>
       <article id="experience" class="glass rounded-2xl p-6" data-aos="fade-up" data-aos-delay="120">
-        <h3 class="text-xl font-semibold">工作经验</h3>
-        <div class="mt-4 space-y-4 text-slate-300">
-          <p>前端工程师 / 产品协作角色（2022 - 至今）</p>
-          <p class="text-sm">
-            负责核心页面架构与性能优化，建立组件规范，推进多端适配与可观测性建设，支持多个业务功能按期上线。
-          </p>
+        <h3 class="text-xl font-semibold">实习经历</h3>
+        <div class="mt-4 space-y-3 text-slate-300">
+          <p><span class="text-neon">艾瑞数智 · 数据开发实习生</span> (2025.05 – 2025.10)</p>
+          <ul class="text-sm list-disc list-inside space-y-1 text-slate-300">
+            <li>负责重庆移动存量运营数据处理，涵盖用户属性、业务类型等多维度数据</li>
+            <li>编写复杂SQL语句，通过多表关联、分组聚合提取业务指标，遵循数据分区规范优化查询性能</li>
+            <li>基于数据中台进行模型分层开发，主要在DW层和ST层构建数据处理流程</li>
+            <li>配置数据交换任务，实现跨数据库表同步和数据分发，支撑前端标签系统和业务看板</li>
+            <li>参与用户画像标签体系建设，持续更新和维护用户特征维度</li>
+          </ul>
         </div>
       </article>
     </section>
 
-    <!-- 技能卡：3D翻转 -->
     <section id="skills" data-aos="fade-up">
       <div class="mb-5 flex items-center justify-between">
-        <h2 class="text-2xl font-bold">核心技能</h2>
+        <h2 class="text-2xl font-bold">专业技能</h2>
         <p class="text-sm text-slate-300">悬停卡片查看详情</p>
       </div>
       <div class="grid gap-5 md:grid-cols-3">
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face glass rounded-2xl p-6">
-              <p class="text-sm text-neon">Frontend</p>
-              <h3 class="mt-2 text-xl font-semibold">React / Vue / TS</h3>
-              <p class="mt-3 text-slate-300">组件化、状态管理、工程化构建</p>
-            </div>
-            <div class="flip-face flip-back rounded-2xl border border-neon/30 bg-panel p-6">
-              <p class="text-sm text-neon">详细能力</p>
-              <p class="mt-3 text-sm leading-7 text-slate-300">具备中大型前端项目拆分经验，熟悉 Vite、性能指标治理、SSR 与可访问性策略。</p>
-            </div>
-          </div>
-        </article>
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face glass rounded-2xl p-6">
-              <p class="text-sm text-lime">Product</p>
-              <h3 class="mt-2 text-xl font-semibold">需求拆解与交互</h3>
-              <p class="mt-3 text-slate-300">流程梳理、原型设计、指标定义</p>
-            </div>
-            <div class="flip-face flip-back rounded-2xl border border-lime/30 bg-panel p-6">
-              <p class="text-sm text-lime">详细能力</p>
-              <p class="mt-3 text-sm leading-7 text-slate-300">能将模糊需求转化为可执行任务，沉淀决策文档和复盘机制，降低跨团队沟通成本。</p>
-            </div>
-          </div>
-        </article>
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face glass rounded-2xl p-6">
-              <p class="text-sm text-fire">Data</p>
-              <h3 class="mt-2 text-xl font-semibold">可视化与分析</h3>
-              <p class="mt-3 text-slate-300">埋点、看板、A/B 验证</p>
-            </div>
-            <div class="flip-face flip-back rounded-2xl border border-fire/30 bg-panel p-6">
-              <p class="text-sm text-fire">详细能力</p>
-              <p class="mt-3 text-sm leading-7 text-slate-300">熟悉业务指标体系搭建，能基于数据提出迭代优先级并验证效果。</p>
-            </div>
-          </div>
-        </article>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-face glass rounded-2xl p-6"><p class="text-sm text-neon">SQL & 数据仓库</p><h3 class="mt-2 text-xl font-semibold">SQL / Hive / GBase</h3><p class="mt-3 text-slate-300">复杂查询、多表关联、性能优化</p></div><div class="flip-face flip-back rounded-2xl border border-neon/30 bg-panel p-6"><p class="text-sm text-neon">实战经验</p><p class="mt-3 text-sm">熟练掌握SQL，能够编写复杂查询和多表关联，熟悉Hive/GBase等数据库的使用和优化，具备数据仓库分层建模实践经验。</p></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-face glass rounded-2xl p-6"><p class="text-sm text-lime">Python & 机器学习</p><h3 class="mt-2 text-xl font-semibold">Pandas / NumPy / Sklearn</h3><p class="mt-3 text-slate-300">数据分析、特征工程、建模</p></div><div class="flip-face flip-back rounded-2xl border border-lime/30 bg-panel p-6"><p class="text-sm text-lime">实战经验</p><p class="mt-3 text-sm">熟练使用Python进行数据处理分析，掌握Pandas、NumPy、Scikit-learn等库在机器学习项目中的应用，熟悉特征工程实施。</p></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-face glass rounded-2xl p-6"><p class="text-sm text-fire">可视化 & 工具</p><h3 class="mt-2 text-xl font-semibold">Tableau / Power BI / Streamlit</h3><p class="mt-3 text-slate-300">看板开发、实时展示</p></div><div class="flip-face flip-back rounded-2xl border border-fire/30 bg-panel p-6"><p class="text-sm text-fire">实战经验</p><p class="mt-3 text-sm">能够使用Tableau、Power BI、Streamlit等工具进行数据可视化分析和看板开发，支持实时数据展示。</p></div></div></div>
       </div>
     </section>
 
-    <!-- 项目卡：3D翻转 -->
     <section id="projects" data-aos="fade-up">
       <div class="mb-5 flex items-center justify-between">
-        <h2 class="text-2xl font-bold">代表项目</h2>
-        <p class="text-sm text-slate-300">Hover 了解项目贡献</p>
+        <h2 class="text-2xl font-bold">项目经验</h2>
+        <p class="text-sm text-slate-300">真实产出与落地效果</p>
       </div>
       <div class="grid gap-5 md:grid-cols-2">
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face rounded-2xl border border-slate-700 bg-cover bg-center p-6" style="background-image: linear-gradient(to top, rgba(7, 16, 29, .92), rgba(7, 16, 29, .4)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80');">
-              <h3 class="text-xl font-semibold">运营后台重构</h3>
-              <p class="mt-3 text-sm text-slate-200">重构权限、工单与报表模块，提升协作效率。</p>
-            </div>
-            <div class="flip-face flip-back rounded-2xl border border-neon/30 bg-panel p-6">
-              <p class="text-sm text-neon">结果</p>
-              <p class="mt-3 text-sm leading-7 text-slate-300">页面首屏耗时下降 38%，缺陷率下降 29%，支持多角色并发配置，减少运营沟通回合。</p>
-            </div>
-          </div>
-        </article>
-        <article class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-face rounded-2xl border border-slate-700 bg-cover bg-center p-6" style="background-image: linear-gradient(to top, rgba(7, 16, 29, .92), rgba(7, 16, 29, .4)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');">
-              <h3 class="text-xl font-semibold">数据驾驶舱</h3>
-              <p class="mt-3 text-sm text-slate-200">统一业务核心指标并沉淀预警看板。</p>
-            </div>
-            <div class="flip-face flip-back rounded-2xl border border-lime/30 bg-panel p-6">
-              <p class="text-sm text-lime">结果</p>
-              <p class="mt-3 text-sm leading-7 text-slate-300">实现分钟级数据刷新，异常监测时效提升 50%+，帮助团队更快完成策略调整。</p>
-            </div>
-          </div>
-        </article>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-face rounded-2xl border border-slate-700 p-6 bg-cover" style="background-image: linear-gradient(to top, rgba(7,16,29,.9), rgba(7,16,29,.5)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80');"><h3 class="text-xl font-semibold">信用卡欺诈检测系统</h3><p class="mt-2 text-sm text-slate-200">机器学习 · 不平衡分类 · Stacking</p></div><div class="flip-face flip-back rounded-2xl border border-neon/30 bg-panel p-6"><p class="text-sm text-neon">成果</p><ul class="mt-3 text-sm list-disc list-inside space-y-1 text-slate-300"><li>基于高度不平衡数据(欺诈样本0.172%)构建检测模型</li><li>设计Stacking集成学习框架，应用SMOTE过采样</li><li>模型达到AUC 0.9768，召回率81.63%</li><li>完成预处理流水线和模型持久化，支持阈值调节</li></ul></div></div></div>
+        <div class="flip-card"><div class="flip-card-inner"><div class="flip-face rounded-2xl border border-slate-700 p-6 bg-cover" style="background-image: linear-gradient(to top, rgba(7,16,29,.9), rgba(7,16,29,.5)), url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80');"><h3 class="text-xl font-semibold">评论情感分析实时系统</h3><p class="mt-2 text-sm text-slate-200">Kafka + Redis + Docker + Streamlit</p></div><div class="flip-face flip-back rounded-2xl border border-lime/30 bg-panel p-6"><p class="text-sm text-lime">成果</p><ul class="mt-3 text-sm list-disc list-inside space-y-1 text-slate-300"><li>基于Kafka+Redis构建实时数据处理流水线</li><li>使用Kafka实现系统组件解耦，Redis存储实时统计结果</li><li>采用Docker容器化部署大数据组件，提升部署效率</li><li>基于Streamlit开发交互式可视化看板，支持实时情感分析展示</li></ul></div></div></div>
       </div>
     </section>
 
-    <!-- 兴趣互动模块 -->
+    <!-- 兴趣爱好区：篮球、马自达模块 -->
     <section id="hobbies" data-aos="fade-up">
       <div class="mb-5 flex items-center justify-between">
-        <h2 class="text-2xl font-bold">兴趣与状态</h2>
-        <p class="text-sm text-slate-300">卡片悬停可查看额外记录</p>
+        <h2 class="text-2xl font-bold">运动 · 兴趣</h2>
+        <p class="text-sm text-slate-300">数据之外的活力</p>
       </div>
       <div class="grid gap-5 md:grid-cols-3">
-        <!-- 跑步：SVG路径动画 + 动态计步 -->
-        <article class="group glass rounded-2xl p-5">
-          <div class="flex items-center justify-between">
-            <h3 class="font-semibold">跑步</h3>
-            <span class="text-xs text-lime">年度打卡</span>
+        <div class="group glass rounded-2xl p-5">
+          <h3 class="font-semibold">🏃 半程马拉松</h3>
+          <p class="mt-2 text-4xl font-bold text-lime">1:45</p>
+          <p class="text-xs text-slate-300">PB (2024年10月)</p>
+          <div class="mt-3 hidden text-xs text-lime group-hover:block">月跑量100km+ | 享受奔跑的节奏</div>
+        </div>
+        <div class="group glass rounded-2xl p-5">
+          <h3 class="font-semibold">🏀 篮球 · 团队节奏</h3>
+          <p class="mt-2 text-sm text-slate-200">单挑库里 · 挡拆配合 & 快攻发起</p>
+          <p class="mt-1 text-xs text-slate-300">xiu~xiu~xiu</p>
+          <div class="mt-3 hidden text-xs text-fire group-hover:block">打遍天下无敌手</div>
+        </div>
+        <div class="group glass rounded-2xl p-5" id="mazdaModule">
+          <h3 class="font-semibold flex items-center gap-1">🚗 <span style="color:#E3000B;">MAZDA</span> · 转子信仰</h3>
+          <div class="mt-2 flex items-center justify-between">
+            <span class="text-xs text-slate-300">模拟转速表 (转子风格)</span>
+            <span id="rotaryRpm" class="text-mazda font-mono text-sm">1200</span><span class="text-xs"> rpm</span>
           </div>
-          <svg viewBox="0 0 220 80" class="mt-3 h-20 w-full">
-            <path d="M10 55 C50 10, 90 70, 130 30 S200 15,210 40" fill="none" stroke="#2A3E5D" stroke-width="3"></path>
-            <path class="runner-path" d="M10 55 C50 10, 90 70, 130 30 S200 15,210 40" fill="none" stroke="#A6FF00" stroke-width="3"></path>
-          </svg>
-          <p class="mt-3 text-3xl font-bold text-lime" id="stepCounter">0</p>
-          <p class="text-xs text-slate-300">累计步数（模拟动态）</p>
-          <div class="mt-3 hidden rounded-lg border border-lime/30 bg-lime/10 p-2 text-xs text-lime group-hover:block">5km PB: 22'48'' | 月均跑量: 86km</div>
-        </article>
-
-        <!-- 篮球：投篮小游戏 -->
-        <article class="group glass rounded-2xl p-5">
-          <div class="flex items-center justify-between">
-            <h3 class="font-semibold">篮球</h3>
-            <span class="text-xs text-fire">互动投篮</span>
+          <div class="mt-1 h-2 w-full rounded-full bg-slate-700 overflow-hidden">
+            <div id="rotaryBar" class="h-full w-1/4 bg-[#E3000B] transition-all duration-200 rotary-glow"></div>
           </div>
-          <div class="relative mt-4 h-32 overflow-hidden rounded-xl border border-slate-700 bg-ink">
-            <div id="hoop" class="absolute right-3 top-8 h-12 w-10 border-4 border-fire/90 border-t-0"></div>
-            <div id="ball" class="ball absolute bottom-3 left-4 h-6 w-6 rounded-full bg-orange-400"></div>
+          <div class="mt-3 flex justify-between items-center">
+            <button id="revBtn" class="fx-btn rounded border border-[#E3000B]/50 px-3 py-1 text-xs text-[#E3000B] hover:bg-[#E3000B]/20">⚡ 踩下油门</button>
+            <span class="text-xs text-slate-300">Zoom-Zoom</span>
           </div>
-          <div class="mt-3 flex items-center justify-between">
-            <button id="shootBtn" class="fx-btn rounded-lg border border-fire/40 px-3 py-1 text-xs">投篮</button>
-            <p class="text-sm text-slate-300">命中：<span id="basketScore" class="font-semibold text-fire">0</span></p>
-          </div>
-          <div class="mt-3 hidden rounded-lg border border-fire/30 bg-fire/10 p-2 text-xs text-fire group-hover:block">半场最高纪录：31 分 | 三分命中率：42%</div>
-        </article>
-
-        <!-- 游戏：像素头像墙 -->
-        <article class="group glass rounded-2xl p-5">
-          <div class="flex items-center justify-between">
-            <h3 class="font-semibold">游戏</h3>
-            <span class="text-xs text-neon">像素互动</span>
-          </div>
-          <div class="pixel-box mt-4 grid grid-cols-4 gap-2 rounded-xl border border-slate-700 p-2">
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🧙</button>
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🛡️</button>
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🚀</button>
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">⚔️</button>
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🎮</button>
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🧠</button>
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">🐉</button>
-            <button class="rounded bg-slate-800 p-2 text-lg transition hover:scale-105 hover:bg-slate-700">⭐</button>
-          </div>
-          <div class="mt-3 hidden rounded-lg border border-neon/30 bg-neon/10 p-2 text-xs text-neon group-hover:block">赛季段位：钻石 | 团队模式胜率：63%</div>
-        </article>
+          <div class="mt-2 hidden text-xs text-[#E3000B] group-hover:block">转子引擎 13B-REW | 弯道快才是真的快</div>
+        </div>
       </div>
     </section>
 
-    <!-- 外部接口模块 -->
     <section id="integrations" data-aos="fade-up">
       <div class="mb-5 flex items-center justify-between">
-        <h2 class="text-2xl font-bold">外部接口与内容联动</h2>
-        <p class="text-sm text-slate-300">B 站 / GitHub / RSS</p>
+        <h2 class="text-2xl font-bold">技术输出 · 内容联动</h2>
+        <p class="text-sm text-slate-300">CSDN / 掘金 / GitHub</p>
       </div>
       <div class="grid gap-5 md:grid-cols-2">
-        <!-- B站视频嵌入 -->
         <article class="glass rounded-2xl p-5">
-          <h3 class="text-lg font-semibold">B 站视频</h3>
-          <div class="mt-4 overflow-hidden rounded-xl border border-slate-700">
-            <iframe
-              class="aspect-video w-full"
-              src="https://player.bilibili.com/player.html?bvid=BV1GJ411x7h7&page=1&high_quality=1&danmaku=0"
-              scrolling="no"
-              frameborder="0"
-              allowfullscreen="true">
-            </iframe>
+          <h3 class="text-lg font-semibold">📖 CSDN 最新文章</h3>
+          <div id="csdnArticles" class="mt-4 space-y-3 text-sm text-slate-300">
+            <div class="rounded-xl border border-slate-700 p-3">
+              <a href="https://blog.csdn.net/2301_77559562/article/details/157766389" target="_blank" class="text-neon hover:underline">🔍 java随笔</a>
+              <p class="text-xs text-slate-400 mt-1">技术笔记分享</p>
+            </div>
+            <div class="rounded-xl border border-slate-700 p-3">
+              <span class="text-slate-300">📘 更多技术笔记持续更新中 →</span>
+              <a href="https://blog.csdn.net/2301_77559562" target="_blank" class="text-neon text-xs block mt-1">访问 CSDN 主页</a>
+            </div>
           </div>
         </article>
-
-        <!-- GitHub 仓库动态展示 -->
         <article class="glass rounded-2xl p-5">
           <div class="flex items-center justify-between">
-            <h3 class="text-lg font-semibold">GitHub 仓库</h3>
-            <a href="https://github.com/Roger6172" target="_blank" rel="noreferrer" class="text-xs text-neon hover:underline">查看主页</a>
+            <h3 class="text-lg font-semibold">🐙 GitHub 活跃仓库</h3>
+            <a href="https://github.com/Roger6172" target="_blank" class="text-xs text-neon hover:underline">@Roger6172</a>
           </div>
-          <div id="githubRepos" class="mt-4 space-y-3 text-sm text-slate-300">
-            <p>加载仓库中...</p>
-          </div>
+          <div id="githubRepos" class="mt-4 space-y-3 text-sm text-slate-300">加载中...</div>
         </article>
       </div>
-      <article class="glass mt-5 rounded-2xl p-5">
-        <!-- 知乎/博客 RSS 最新文章列表 -->
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold">知乎 / 博客 RSS</h3>
-          <span class="text-xs text-slate-400">自动抓取最新内容</span>
-        </div>
-        <div id="rssList" class="mt-4 grid gap-3 md:grid-cols-2">
-          <p class="text-sm text-slate-300">加载文章中...</p>
-        </div>
-      </article>
     </section>
 
-    <!-- 金数据发送消息 -->
     <section id="contact" class="pb-16" data-aos="fade-up">
-      <div class="mb-5 flex items-center justify-between">
-        <h2 class="text-2xl font-bold">发送消息</h2>
-        <p class="text-sm text-slate-300">保留金数据表单入口</p>
-      </div>
+      <div class="mb-5"><h2 class="text-2xl font-bold">📬 联系与交流</h2></div>
       <div class="grid gap-5 md:grid-cols-2">
         <article class="glass rounded-2xl p-5">
-          <h3 class="text-lg font-semibold">快速联系</h3>
-          <p class="mt-3 text-sm text-slate-300">欢迎留下你的项目背景、目标和预期时间，我会在 24 小时内回复。</p>
-          <div class="mt-5 space-y-3 text-sm text-slate-300">
-            <p>微信：Roger_Studio</p>
-            <p>邮箱：roger@example.com</p>
-            <p>可协作方向：Web 应用、产品设计、性能优化</p>
+          <h3 class="text-lg font-semibold">一起聊聊大数据 / 转子引擎 / 跑步</h3>
+          <p class="mt-3 text-sm text-slate-300">如果你对数据开发、机器学习或马自达情怀感兴趣，欢迎交流。实习机会也随时勾兑～</p>
+          <div class="mt-5 space-y-2 text-sm">
+            <p>📞 电话/微信：17823896729</p>
+            <p>📧 邮箱：luojie16@ctbu.edu.cn</p>
+            <p>📍 地址：重庆市南岸区</p>
           </div>
-          <a href="#hero" class="fx-btn mt-5 inline-block rounded-lg border border-neon/40 px-4 py-2 text-sm">回到顶部</a>
+          <a href="#hero" class="fx-btn mt-5 inline-block rounded-lg border border-neon/40 px-4 py-2 text-sm">回到顶部 ↑</a>
         </article>
         <article class="glass rounded-2xl p-5">
-          <h3 class="text-lg font-semibold">金数据表单</h3>
-          <!-- TODO: 将 src 替换为你原有的金数据表单地址，以保留原“发送消息”能力 -->
-          <iframe
-            title="金数据表单"
-            src="https://jinshuju.net/f/your-form-id"
-            class="mt-4 h-80 w-full rounded-xl border border-slate-700 bg-ink"
-            loading="lazy">
-          </iframe>
+          <h3 class="text-lg font-semibold">掘金 · 日常沸点</h3>
+          <div id="juejinPins" class="mt-3 space-y-2 text-sm text-slate-300">
+            <div class="border-l-2 border-lime/40 pl-3 py-1">⚡ “实习今天也离职了，但技术探索不停”</div>
+            <div class="border-l-2 border-neon/40 pl-3 py-1">🏊 虾班去游泳了jrm，冲冲冲</div>
+            <div class="border-l-2 border-fire/40 pl-3 py-1">🏃 跑步打卡 + K歌之王</div>
+            <div class="text-xs text-slate-400 mt-2"><a href="https://juejin.cn/user/687637275351131" target="_blank" class="text-neon">→ 掘金主页 更多沸点互动</a></div>
+          </div>
         </article>
       </div>
     </section>
   </main>
 
   <footer class="border-t border-slate-800/80 py-6 text-center text-xs text-slate-400">
-    <p>© <span id="currentYear"></span> Roger · Built with Tailwind CSS · Interactive Resume</p>
+    <p>© 2025 Roger · 大数据开发 · 保持好奇 持续奔跑</p>
   </footer>
 
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <script>
-    // 初始化：滚动动画
-    AOS.init({
-      duration: 850,
-      offset: 70,
-      easing: "ease-out-cubic",
-      once: true
-    });
-
-    // 初始化：英雄区粒子效果
+    AOS.init({ duration: 800, once: true });
     tsParticles.load("particles-hero", {
-      background: { color: { value: "transparent" } },
-      fpsLimit: 60,
-      particles: {
-        number: { value: 48, density: { enable: true, area: 900 } },
-        color: { value: ["#00D4FF", "#A6FF00", "#FF6A00"] },
-        links: { enable: true, distance: 130, color: "#3A5A88", opacity: 0.35, width: 1 },
-        move: { enable: true, speed: 1.2 },
-        opacity: { value: 0.65 },
-        size: { value: { min: 1, max: 3 } }
-      },
-      interactivity: {
-        events: {
-          onHover: { enable: true, mode: "repulse" },
-          resize: true
-        },
-        modes: { repulse: { distance: 80, duration: 0.25 } }
-      }
+      fpsLimit: 60, particles: { number: { value: 40 }, color: { value: ["#00D4FF","#A6FF00"] }, links: { enable: true, color: "#3A5A88", opacity: 0.3 }, move: { speed: 0.8 } }
     });
+    const glow = document.getElementById("cursorGlow");
+    document.addEventListener("pointermove", e => { glow.style.left = e.clientX + "px"; glow.style.top = e.clientY + "px"; });
 
-    // 滚动视差
-    const parallaxTargets = document.querySelectorAll("[data-parallax]");
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY;
-      parallaxTargets.forEach((item) => {
-        const speed = Number(item.dataset.parallax || 0.1);
-        item.style.transform = "translateY(" + y * speed + "px)";
-      });
-    }, { passive: true });
-
-    // 鼠标光晕与尾迹
-    const cursorGlow = document.getElementById("cursorGlow");
-    let trailTick = 0;
-    document.addEventListener("pointermove", (event) => {
-      cursorGlow.style.left = event.clientX + "px";
-      cursorGlow.style.top = event.clientY + "px";
-      trailTick += 1;
-      if (trailTick % 3 !== 0) return;
-      const dot = document.createElement("span");
-      dot.className = "trail-dot";
-      dot.style.left = event.clientX + "px";
-      dot.style.top = event.clientY + "px";
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 600);
-    });
-
-    // 跑步计步数字动画
-    const stepCounter = document.getElementById("stepCounter");
-    const targetSteps = 2680000;
-    let currentSteps = 0;
-    function animateSteps() {
-      if (currentSteps >= targetSteps) return;
-      currentSteps += Math.ceil((targetSteps - currentSteps) / 18);
-      stepCounter.textContent = currentSteps.toLocaleString("zh-CN");
-      requestAnimationFrame(animateSteps);
-    }
-    animateSteps();
-
-    // 篮球互动小游戏
-    const ball = document.getElementById("ball");
-    const scoreText = document.getElementById("basketScore");
-    let score = 0;
-    document.getElementById("shootBtn").addEventListener("click", () => {
-      ball.classList.remove("shoot");
-      void ball.offsetWidth;
-      ball.classList.add("shoot");
-      const hit = Math.random() > 0.42;
-      if (hit) {
-        score += 1;
-        scoreText.textContent = String(score);
-      }
+    // 马自达转子引擎互动
+    let rpm = 1200;
+    const rpmBar = document.getElementById("rotaryBar"), rpmVal = document.getElementById("rotaryRpm");
+    document.getElementById("revBtn")?.addEventListener("click", () => {
+      rpm = Math.min(9000, rpm + 420);
+      let percent = (rpm - 800) / 8200;
+      rpmBar.style.width = Math.min(100, Math.max(0, percent * 100)) + "%";
+      rpmVal.innerText = rpm;
       setTimeout(() => {
-        ball.classList.remove("shoot");
-      }, 720);
+        if(rpm > 1200) { rpm = Math.max(1200, rpm - 280); rpmBar.style.width = ((rpm-800)/8200*100)+"%"; rpmVal.innerText = rpm; }
+      }, 700);
     });
 
-    // GitHub 仓库拉取
-    async function loadGitHubRepos() {
-      const container = document.getElementById("githubRepos");
+    // 加载GitHub仓库
+    async function loadGitHub() {
+      let c = document.getElementById("githubRepos");
       try {
-        const response = await fetch("https://api.github.com/users/Roger6172/repos?sort=updated&per_page=6");
-        if (!response.ok) throw new Error("GitHub API Error");
-        const repos = await response.json();
-        const validRepos = repos.filter((repo) => !repo.fork).slice(0, 4);
-        if (!validRepos.length) throw new Error("No Repo");
-        container.innerHTML = validRepos.map((repo) => {
-          const lang = repo.language || "Unknown";
-          return (
-            '<a class="block rounded-xl border border-slate-700 p-3 transition hover:border-neon/50 hover:bg-slate-800/50" target="_blank" rel="noreferrer" href="' + repo.html_url + '">' +
-              '<div class="flex items-center justify-between">' +
-                '<p class="font-semibold text-slate-100">' + repo.name + "</p>" +
-                '<p class="text-xs text-slate-400">' + lang + "</p>" +
-              "</div>" +
-              '<p class="mt-1 line-clamp-2 text-xs text-slate-300">' + (repo.description || "暂无描述") + "</p>" +
-            "</a>"
-          );
-        }).join("");
-      } catch (error) {
-        container.innerHTML = '<p class="rounded-xl border border-slate-700 p-3 text-xs text-slate-300">仓库加载失败，请稍后刷新或检查 GitHub 用户名。</p>';
-      }
+        let r = await fetch("https://api.github.com/users/Roger6172/repos?sort=updated&per_page=4");
+        if(!r.ok) throw new Error();
+        let repos = await r.json();
+        c.innerHTML = repos.map(repo => `<a href="${repo.html_url}" target="_blank" class="block rounded-xl border border-slate-700 p-3 hover:border-neon/50"><p class="font-semibold">${repo.name}</p><p class="text-xs text-slate-400">${repo.description || "大数据相关实践"}</p></a>`).join("");
+      } catch { c.innerHTML = "<p class='text-xs'>暂无法获取，可访问 GitHub 主页</p>"; }
     }
-
-    // RSS 文章抓取（知乎/博客）
-    async function loadRssArticles() {
-      const container = document.getElementById("rssList");
-      const feedSources = [
-        { name: "博客", url: "https://rsshub.app/github/issue/Roger6172/Roger6172.github.io" },
-        { name: "知乎", url: "https://rsshub.app/zhihu/people/roger6172/posts" }
-      ];
-      const cards = [];
-      for (const source of feedSources) {
-        try {
-          const endpoint = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(source.url);
-          const response = await fetch(endpoint);
-          if (!response.ok) throw new Error("rss2json error");
-          const data = await response.json();
-          const items = (data.items || []).slice(0, 2);
-          if (!items.length) continue;
-          items.forEach((item) => {
-            cards.push(
-              '<a class="block rounded-xl border border-slate-700 p-3 transition hover:border-lime/50 hover:bg-slate-800/50" href="' + item.link + '" target="_blank" rel="noreferrer">' +
-                '<p class="text-xs text-lime">' + source.name + "</p>" +
-                '<p class="mt-1 text-sm font-medium text-slate-100">' + item.title + "</p>" +
-                '<p class="mt-1 text-xs text-slate-400">' + (item.pubDate || "").slice(0, 10) + "</p>" +
-              "</a>"
-            );
-          });
-        } catch (error) {
-          continue;
-        }
-      }
-      container.innerHTML = cards.length
-        ? cards.join("")
-        : '<p class="rounded-xl border border-slate-700 p-3 text-xs text-slate-300">RSS 暂不可用，请确认源地址或使用你自己的 RSSHub 地址。</p>';
-    }
-
-    document.getElementById("currentYear").textContent = String(new Date().getFullYear());
-    loadGitHubRepos();
-    loadRssArticles();
+    loadGitHub();
   </script>
 </body>
 </html>
+```
